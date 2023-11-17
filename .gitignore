@@ -6,6 +6,7 @@ __pycache__/
 # Distribution / packaging
 dist/
 *.egg-info/
+_build/
 
 # Local support files
 install.sh
