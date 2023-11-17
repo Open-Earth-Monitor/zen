@@ -1,6 +1,6 @@
 # zen - A Python Library for Interacting with Zenodo
 
-<img src="docs/img/zen-logo.png" alt="zen icon" align="right" height="80" />
+<img src="docs/_images/zen-logo.png" alt="zen icon" align="right" height="80" />
 
 ## Overview 
 
@@ -169,7 +169,7 @@ meta.render(replacements)
 
 ## Documentation
 For detailed usage and additional examples, please refer to the zen 
-[documentation](docs/html/index.html).
+[documentation](https://rolfsimoes.github.io/zen).
 
 ## Contributing
 We welcome contributions! If you would like to contribute to the zen library, please see our [Contributing Guide](CONTRIBUTING.md) for more information.
