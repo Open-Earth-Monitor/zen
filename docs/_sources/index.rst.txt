@@ -30,12 +30,6 @@ Indices and tables
 * :ref:`search`
 
 
-License
-=======
-
-© OpenGeoHub Foundation, 2023. Licensed under the `MIT License <https://github.com/Open-Earth-Monitor/zen/blob/main/LICENSE>`_.
-
-
 Acknowledgements & Funding
 ==========================
 
@@ -48,3 +42,5 @@ funding from the European Commission (EC) through the projects:
 * `AI4SoilHealth <https://ai4soilhealth.eu/>`_: Accelerating collection and use of soil health 
   information using AI technology to support the Soil Deal for Europe and EU Soil Observatory 
   (1 Jan. 2023 – 31 Dec. 2026 - `101086179 <https://cordis.europa.eu/project/id/101086179>`_)
+
+© OpenGeoHub Foundation, 2023. Licensed under the `MIT License <https://github.com/Open-Earth-Monitor/zen/blob/main/LICENSE>`_.
