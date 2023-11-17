@@ -169,7 +169,7 @@ meta.render(replacements)
 
 ## Documentation
 For detailed usage and additional examples, please refer to the zen 
-[documentation](https://rolfsimoes.github.io/zen).
+[documentation](https://open-earth-monitor.github.io/zen).
 
 ## Contributing
 We welcome contributions! If you would like to contribute to the zen library, please see our [Contributing Guide](CONTRIBUTING.md) for more information.

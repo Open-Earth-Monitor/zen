@@ -23,8 +23,24 @@ This documentation serves as a comprehensive guide to zen's features and functio
 
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+
+Acknowledgements & Funding
+--------------------------
+
+This work is supported by `OpenGeoHub Foundation <https://opengeohub.org/>`_ and has received 
+funding from the European Commission (EC) through the projects:
+
+* `Open-Earth-Monitor Cyberinfrastructure <https://earthmonitor.org/>`_: Environmental information 
+  to support EU’s Green Deal (1 Jun. 2022 – 31 May 2026 - 
+  `101059548 <https://cordis.europa.eu/project/id/101059548>`_)
+* `AI4SoilHealth <https://ai4soilhealth.eu/>`_: Accelerating collection and use of soil health 
+  information using AI technology to support the Soil Deal for Europe and EU Soil Observatory 
+  (1 Jan. 2023 – 31 Dec. 2026 - `101086179 <https://cordis.europa.eu/project/id/101086179>`_)
+
+Licensed under the `MIT License <https://github.com/Open-Earth-Monitor/zen/blob/main/LICENSE>`_.
