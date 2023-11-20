@@ -1057,8 +1057,67 @@ class Metadata(_MetaBaseObject):
     def upload_type(self, value: str) -> None:
         _check_instance(value, str)
         if value not in Metadata.upload_types:
-            raise ValueError('Invalid `publication_type` value. Please, see `publication_types` attribute for supported options.')
+            raise ValueError('Invalid `upload_type` parameter. Please, see `Metadata.upload_type` ' +
+                             'attribute for supported options.')
         self.data['upload_type'] = value
+    
+    @property
+    def publication_type(self) -> str:
+        """Type of the publication (required field, if upload_type='publication').
+        
+        Controlled vocabulary:
+            * annotationcollection: Annotation collection
+            * book: Book
+            * section: Book section
+            * conferencepaper: Conference paper
+            * datamanagementplan: Data management plan
+            * article: Journal article
+            * patent: Patent
+            * preprint: Preprint
+            * deliverable: Project deliverable
+            * milestone: Project milestone
+            * proposal: Proposal
+            * report: Report
+            * softwaredocumentation: Software documentation
+            * taxonomictreatment: Taxonomic treatment
+            * technicalnote: Technical note
+            * thesis: Thesis
+            * workingpaper: Working paper
+            * other: Other
+        
+        """
+        return self.data['publication_type']
+    
+    @upload_type.setter
+    def publication_type(self, value: str) -> None:
+        _check_instance(value, str)
+        if value not in Publication.publication_types:
+            raise ValueError('Invalid `publication_type` parameter. Please, see `Publication.publication_types` ' +
+                             'attribute for supported options.')
+        self.data['publication_type'] = value
+    
+    @property
+    def image_type(self) -> str:
+        """Type of the image (required field, if upload_type='image').
+        
+        Controlled vocabulary:
+            * figure: Figure
+            * plot: Plot
+            * drawing: Drawing
+            * diagram: Diagram
+            * photo: Photo
+            * other: Other
+        
+        """
+        return self.data['image_type']
+    
+    @upload_type.setter
+    def image_type(self, value: str) -> None:
+        _check_instance(value, str)
+        if value not in Image.image_types:
+            raise ValueError('Invalid `image_type` parameter. Please, see `Image.image_types` ' +
+                             'attribute for supported options.')
+        self.data['image_type'] = value
     
     @property
     def title(self) -> str:
