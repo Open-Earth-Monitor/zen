@@ -158,7 +158,7 @@ ds = LocalFiles.from_template(filename_template)
 ds.expand(index=[1,2,3])
 ds.modify_url(prefix='examples/')
 
-print([f.filename from f in ds])
+print([f.url for f in ds])
 #... ['examples/file1.csv', 'examples/file2.csv', 'examples/file3.csv']
 
 # Get the previous metadata template and render a metadata
