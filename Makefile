@@ -6,7 +6,7 @@
 SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SPHINXAPIDOC  ?= sphinx-apidoc
-SOURCEDIR     = .
+SOURCEDIR     = src
 BUILDDIR      = sphinx/_build
 DOCSDIR       = sphinx
 
