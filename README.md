@@ -32,7 +32,7 @@ manipulate your deposition data.
 You can install **zen** using pip:
 
 ```bash
-pip install -e 'git+https://gitlab.opengeohub.org/rolfsimoes/zen#egg=zen[full]'
+pip install -e 'git+https://github.com/Open-Earth-Monitor/zen#egg=zen[full]'
 ```
 
 ## Getting Started
