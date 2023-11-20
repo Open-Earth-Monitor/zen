@@ -1053,6 +1053,13 @@ class Metadata(_MetaBaseObject):
         """
         return self.data['upload_type']
     
+    @upload_type.setter
+    def upload_type(self, value: str) -> None:
+        _check_instance(value, str)
+        if value not in Metadata.upload_types:
+            raise ValueError('Invalid `publication_type` value. Please, see `publication_types` attribute for supported options.')
+        self.data['upload_type'] = value
+    
     @property
     def title(self) -> str:
         """Title of deposition (required field).
