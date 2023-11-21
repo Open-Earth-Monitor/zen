@@ -12,4 +12,3 @@ _build/
 deploy.sh
 zen.code-workspace
 .vscode/settings.json
-.env
