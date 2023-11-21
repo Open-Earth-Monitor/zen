@@ -34,6 +34,10 @@ import os
 import requests
 
 
+class __sys__:
+    type = type
+
+
 class APIResponseError(Exception):
     """Exception for Zenodo API response errors.
     
@@ -925,40 +929,93 @@ class Depositions:
         return __dataset__.Deposition(self._api, data)
 
 
-class Licenses:
+class License:
+    def __init__(self, data) -> None:
+        self._data = data
+    
+    def __repr__(self) -> str:
+        return str(dict(id=self.id, title=self.title))
+    
+    @property
+    def id(self):
+        if 'id' in self._data:
+            return self._data['id']
+    
+    @property
+    def title(self):
+        if 'title' in self._data:
+            return self._data['title']
+
+class _PagedData:
+    def __init__(self, data) -> None:
+        self._data = data
+    
+    def __repr__(self) -> str:
+        return str(self.hits)
+    
+    def _new(self, value: Dict[str,Any]) -> Dict[str,Any]:
+        return value
+    
+    @property
+    def hits(self):
+        if 'hits' in self._data and 'hits' in self._data['hits']:
+            return [self._new(item) for item in self._data['hits']['hits']]
+    
+    @property
+    def total_hits(self):
+        if 'hits' in self._data and 'total' in self._data['hits']:
+            return self._data['hits']['total']
+    
+    @property
+    def links(self):
+        if 'links' in self._data:
+            return self._data['links']
+    
+    @property
+    def next_url(self):
+        if self.links is not None and 'next' in self.links:
+            return self.links['next']
+
+class LicensesPage(_PagedData):
+    def __init__(self, data) -> None:
+        super().__init__(data)
+    
+    def hits(self):
+        page = super().hits
+        return [License(item) for item in page]
+            
+class Vocabularies:
     """Interacting with licenses on the Zenodo API. 
     
-    The Licenses class simplifies interactions with the Zenodo API. It is utilized to give 
-    an intuitive way to explore Zenodo API licenses, making it easier to list and retrieve
-    licenses vocabularies.
-    
-    It is used by the Zenodo class to perform various Zenodo API operations, such as listing 
-    supported licenses and facilitating advanced searches based on different criteria.
+    The Vocabularies class implements `vocabularies` endpoint of the Zenodo API. This class is 
+    used by the `Zenodo` class to perform vocabularies queries on Zenodo API.
 
     Args:
         api (Zenodo): The Zenodo instance used to interact with Zenodo API.
     
     Examples:
         
-        1. Accessing the instance of the Deposition class:
+        1. Accessing the instance of the Vocabularies class:
         
         >>> from zen import Zenodo
         >>> zen = Zenodo(url=Zenodo.sandbox_url, api_token='your_api_token')
-        >>> zen.licenses  # Instance of class Licenses
+        >>> zen.vocabularies  # Instance of class Vocabularies
         
         2. Retrieving a list of licenses that match a specific query:
         
-        >>> zen.licenses.list(q="cc", sort="bestmatch", size=10)
+        >>> zen.vocabularies.list(type='licenses', q="cc", size=25, page=2)
         
         3. Retrieving a Zenodo license:
         
-        >>> zen.licenses.retrieve('cc-zero')
+        >>> zen.vocabularies.retrieve(type='license', id='cc-zero')
     
     """ 
+    types = ['languages', 'licenses', 'resourcetypes']
+    
     def __init__(self, api: Zenodo) -> None:
         self._api = api
     
-    def list(self, q: Optional[str]=None, page: Optional[int]=None, 
+    def list(self, type: str, q: Optional[str]=None, tags: Optional[str]=None, page: Optional[int]=None, 
              size: Optional[int]=None) -> List[Deposition]:
         """Retrieve a list of licenses from Zenodo.
         
@@ -967,6 +1024,7 @@ class Licenses:
         maximum number of licenses per page, and the page number to retrieve.
         
         Args: 
+            type (str): Vocabulary (one of languages, licenses or resourcetypes)
             q (Optional[str]=None): The Elasticsearch query to filter the licenses.
             page (Optional[int]=None): The page number of pagination. 
             size (Optional[int]=None): The maximum number of licenses to retrieve per page.
@@ -975,13 +1033,16 @@ class Licenses:
             List[Deposition]: A list of license dictionary representing the retrieved licenses. 
         
         """ 
+        if not isinstance(type, str):
+            raise TypeError('Invalid `type` parameter. Expecting a `str` but got a ' +
+                            f'`{__sys__.type(type)}` instead.')
+        
         # Builds the query
-        query = dict(q=q, page=page, size=size)
+        query = dict(q=q, tags=tags, page=page, size=size)
         query = {k: v for k, v in query.items() if v is not None}
         # Prepare for pagination
-        page_results = self._api.api.list_depositions(query)
+        page_results = self._api.api.list_vocabularies(type, query)
         return page_results
-        return [item for item in items]
     
     def retrieve(self, deposition: Union[Deposition,Dict[str,Any],int]) -> Deposition:
         """Retrieves a specific deposition from the Zenodo API.
@@ -1053,7 +1114,7 @@ class Zenodo:
         self._api = _APIZenodo(url, token, headers)
         self._depositions = Depositions(self)
         self._records = None
-        self._licenses = None
+        self._licenses = Licenses(self)
     
     @property
     def api(self) -> _APIZenodo:
