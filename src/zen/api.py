@@ -24,6 +24,7 @@ Note:
 """
 from __future__ import annotations
 from typing import Tuple, List, Dict, Any, Optional, Union, Iterator, TYPE_CHECKING
+from typing_extensions import Self
 if TYPE_CHECKING:
     from requests import Response
     from .dataset import Deposition
@@ -32,10 +33,6 @@ import zen.dataset as __dataset__
 import zen.metadata as __metadata__
 import os
 import requests
-
-
-class __sys__:
-    type = type
 
 
 class APIResponseError(Exception):
@@ -298,16 +295,10 @@ class _APIZenodo:
             API requests. 
     
     """ 
-    vocabulary_types = [
-        'languages', 
-        'licenses',
-        'resourcetypes'
-    ]
-
     def __init__(self, base_url: str, token: Optional[str]=None, params: Optional[Dict[str,str]]=None, 
                  headers: Optional[Dict[str,str]]=None) -> None:
         self.base_url = base_url.rstrip('/')
-        self._api = _APIRequest(token, params, headers)
+        self._req = _APIRequest(token, params, headers)
     
     def url_token(self, url: str, **kwargs) -> str:
         """Returns a provided base url with the Zenodo API token as a query string parameter. 
@@ -320,59 +311,49 @@ class _APIZenodo:
             str: The URL with 'access_token=<token>' parameter in the query string. 
         
         """ 
-        return self._api.url_token(url, **kwargs)
+        return self._req.url_token(url, **kwargs)
     
-    def list_vocabularies(self, vocabulary:str, query_args: Optional[Dict[str,Any]]=None, 
+    def list_licenses(self, query_args: Optional[Dict[str,Any]]=None, 
                           **kwargs) -> Dict:
-        """Retrieves a list of a vocabulary entries.
+        """Retrieves a list of licenses entries.
 
         Args: 
-            vocabulary (str): Vocabulary type (one of 'languages', 'licenses' or 'resourcetypes').
             query_args (Optional[Dict[str,Any]]=None): Additional query arguments for the API request. 
             **kwargs: Additional keyword arguments for the API request. 
         
         Returns: 
-            dict: The response JSON containing the list of vocabulary's entries. 
+            dict: The response JSON containing the list of licenses entries. 
         
         Raises: 
-            TypeError: If the `vocabulary` parameter is not a string. 
-            ValueError: If the `vocabulary` parameter is not in `vocabulary_types`. 
             TypeError: If the `query_args` parameter is not a dictionary. 
             APIResponseError: If the response status code indicates an error during the API request. 
         
         """ 
-        if not isinstance(vocabulary, str):
-            raise TypeError('Invalid `type` parameter. Value must be `str` but got ' +
-                            f'`{type(vocabulary)}` instead.')
-        if not vocabulary in _APIZenodo.vocabulary_types:
-            raise ValueError("Invalid `type` parameter. Value must be one of one of 'languages', " +
-                             "'licenses' or 'resourcetypes'.")
         if query_args is not None and not isinstance(query_args, dict):
             raise TypeError('Invalid `query_args` parameter. Value must be `dict` but got ' +
                             f'`{type(query_args)}`.')
-        url = f"{self.base_url}/api/vocabularies/{vocabulary}"
-        response = self._api.get(url, params=query_args, **kwargs)
+        url = f"{self.base_url}/api/licenses"
+        response = self._req.get(url, params=query_args, **kwargs)
         return response.json()
     
-    def retrieve_vocabulary(self, vocabulary:str, vocabulary_id: str, **kwargs) -> Dict:
-        """Retrieves a specific vocabulary entry from the Zenodo API. 
+    def retrieve_license(self, license_id: str, **kwargs) -> Dict:
+        """Retrieves a specific license entry from the Zenodo API. 
     
         Args: 
-            vocabulary (str): Vocabulary type (one of 'languages', 'licenses' or 'resourcetypes').
-            vocabulary_id (str): The ID of the vocabulary to retrieve. 
+            license_id (str): The ID of the license to retrieve. 
             **kwargs: Additional keyword arguments for the API request. 
     
         Returns: 
-            dict: The response JSON containing the vocabulary entry information. 
+            dict: The response JSON containing the license entry information. 
     
         Raises: 
             APIResponseError: If the response status code indicates an error during the API request. 
         
         """ 
-        if isinstance(vocabulary_id, dict):
-            vocabulary_id = vocabulary_id['id']
-        url = f"{self.base_url}/api/vocabularies/{vocabulary}/{vocabulary_id}"
-        response = self._api.get(url, **kwargs)
+        if isinstance(license_id, dict):
+            license_id = license_id['id']
+        url = f"{self.base_url}/api/licenses/{license_id}"
+        response = self._req.get(url, **kwargs)
         return response.json()
     
     def list_records(self, query_args: Optional[Dict[str,Any]]=None, **kwargs) -> Dict:
@@ -393,7 +374,7 @@ class _APIZenodo:
             raise TypeError('Invalid `query_args` parameter. Value must be `dict` but got ' +
                             f'`{type(query_args)}` instead.')
         url = f"{self.base_url}/api/records"
-        response = self._api.get(url, params=query_args, **kwargs)
+        response = self._req.get(url, params=query_args, **kwargs)
         return response.json()
     
     def retrieve_record(self, record_id: Union[int,Dict], **kwargs) -> Dict:
@@ -413,29 +394,29 @@ class _APIZenodo:
         if isinstance(record_id, dict):
             record_id = record_id['id']
         url = f"{self.base_url}/api/records/{record_id}"
-        response = self._api.get(url, **kwargs)
+        response = self._req.get(url, **kwargs)
         return response.json()
     
-    def iter_pagination(self, data: Dict, limit: Optional[int]=None, **kwargs) -> Iterator[Dict]:
+    def iter_pagination(self, data: Dict[str,Any], limit: Optional[int]=None, **kwargs) -> Iterator[Dict[str,Any]]:
         """Iterates over paginated data from the Zenodo API. 
     
         Args: 
-            data (dict): The initial page of data from the API response. 
+            data (Dict[str,Any]): The initial page of data from the API response. 
             limit (Optional[int]=None): The maximum number of pages to retrieve. 
             **kwargs: Additional keyword arguments for the API request. 
     
         Returns: 
-            Iterator[dict]: An iterator that yields each page of data. 
+            Iterator[Dict[str,Any]]: An iterator that yields each page of data. 
     
         Raises: 
             APIResponseError: If the response status code indicates an error during the API request. 
         """ 
         page = data
         yield page
-        i = 1
+        i = 0
         while 'links' in page and 'next' in page['links'] and (limit is None or i < limit):
             url = page['links']['next']
-            response = self._api.get(url, **kwargs)
+            response = self._req.get(url, **kwargs)
             page = response.json()
             yield page
             i += 1
@@ -458,7 +439,7 @@ class _APIZenodo:
             raise TypeError('Invalid `query_args` parameter. Value must be `dict` but got ' +
                             f'`{type(query_args)}` instead.')
         url = f"{self.base_url}/api/deposit/depositions"
-        response = self._api.get(url, params=query_args, **kwargs)
+        response = self._req.get(url, params=query_args, **kwargs)
         return response.json()
     
     def create_deposition(self, metadata: Optional[Dict[str,Any]]=None, **kwargs) -> Dict:
@@ -483,7 +464,7 @@ class _APIZenodo:
         if len(metadata) > 0 and 'metadata' not in metadata:
             metadata = dict(metadata=metadata)
         url = f"{self.base_url}/api/deposit/depositions"
-        response = self._api.post(url, json=metadata, **kwargs)
+        response = self._req.post(url, json=metadata, **kwargs)
         return response.json()
         
     
@@ -508,7 +489,7 @@ class _APIZenodo:
             raise TypeError('Invalid `deposition_id` parameter. Value must be `int` but got ' +
                             f'`{type(deposition_id)}`.')
         url = f"{self.base_url}/api/deposit/depositions/{deposition_id}"
-        response = self._api.get(url, **kwargs)
+        response = self._req.get(url, **kwargs)
         return response.json()
     
     def update_deposition(self, deposition_id: Union[int,Dict], 
@@ -537,7 +518,7 @@ class _APIZenodo:
         if 'metadata' not in metadata:
             metadata = dict(metadata=metadata)
         url = f"{self.base_url}/api/deposit/depositions/{deposition_id}"
-        response = self._api.put(url, json=metadata, **kwargs)
+        response = self._req.put(url, json=metadata, **kwargs)
         return response.json()
     
     def delete_deposition(self, deposition_id: Union[int,Dict], **kwargs) -> None:
@@ -558,7 +539,7 @@ class _APIZenodo:
         if isinstance(deposition_id, dict):
             deposition_id = deposition_id['id']
         url = f"{self.base_url}/api/deposit/depositions/{deposition_id}"
-        self._api.delete(url, **kwargs)
+        self._req.delete(url, **kwargs)
         
     def get_deposition_bucket(self, deposition_id: Union[int,Dict]) -> str:
         """Retrieves the bucket URL for a specific deposition on the Zenodo API. 
@@ -597,7 +578,7 @@ class _APIZenodo:
         if isinstance(deposition_id, dict):
             deposition_id = deposition_id['id']
         url = f"{self.base_url}/api/deposit/depositions/{deposition_id}/files"
-        response = self._api.get(url, **kwargs)
+        response = self._req.get(url, **kwargs)
         return response.json()
     
     def publish_deposition(self, deposition_id: Union[int,Dict], **kwargs) -> Dict:
@@ -618,7 +599,7 @@ class _APIZenodo:
         if isinstance(deposition_id, dict):
             deposition_id = deposition_id['id']
         url = f"{self.base_url}/api/deposit/depositions/{deposition_id}/actions/publish"
-        response = self._api.post(url, **kwargs)
+        response = self._req.post(url, **kwargs)
         return response.json()
     
     def edit_deposition(self, deposition_id: Union[int,Dict], **kwargs) -> Dict:
@@ -639,7 +620,7 @@ class _APIZenodo:
         if isinstance(deposition_id, dict):
             deposition_id = deposition_id['id']
         url = f"{self.base_url}/api/deposit/depositions/{deposition_id}/actions/edit"
-        response = self._api.post(url, **kwargs)
+        response = self._req.post(url, **kwargs)
         return response.json()
     
     def discard_deposition(self, deposition_id: Union[int,Dict], **kwargs) -> Dict:
@@ -660,7 +641,7 @@ class _APIZenodo:
         if isinstance(deposition_id, dict):
             deposition_id = deposition_id['id']
         url = f"{self.base_url}/api/deposit/depositions/{deposition_id}/actions/discard"
-        response = self._api.post(url, **kwargs)
+        response = self._req.post(url, **kwargs)
         return response.json()
     
     def new_version_deposition(self, deposition_id: Union[int,Dict], **kwargs) -> Dict:
@@ -682,9 +663,9 @@ class _APIZenodo:
         if isinstance(deposition_id, dict):
             deposition_id = deposition_id['id']
         url = f"{self.base_url}/api/deposit/depositions/{deposition_id}/actions/newversion"
-        response = self._api.post(url, **kwargs).json()
+        response = self._req.post(url, **kwargs).json()
         last_draft_url = response['links']['latest_draft']
-        response = self._api.get(last_draft_url, **kwargs)
+        response = self._req.get(last_draft_url, **kwargs)
         return response.json()
     
     def create_deposition_file(self, deposition_id: Union[int,Dict], filename: str, \
@@ -713,7 +694,7 @@ class _APIZenodo:
             bucket_filename = os.path.basename(filename)
         url = f"{bucket_url}/{bucket_filename}"
         with open(filename, 'rb') as file_data:
-            response = self._api.put(url, data=file_data, **kwargs)
+            response = self._req.put(url, data=file_data, **kwargs)
         return response.json()
     
     def sort_deposition_files(self, deposition_id: Union[int,Dict], 
@@ -740,7 +721,7 @@ class _APIZenodo:
             deposition_id = deposition_id['id']
         file_id_list = [{'id': v['id']} for v in file_id_list]
         url = f"{self.base_url}/api/deposit/depositions/{deposition_id}/files"
-        response = self._api.put(url, json=file_id_list, **kwargs)
+        response = self._req.put(url, json=file_id_list, **kwargs)
         return response.json()
     
     def retrieve_deposition_file(self, file_id: Union[str,Dict], **kwargs) -> Dict:
@@ -761,7 +742,7 @@ class _APIZenodo:
         """ 
         if isinstance(file_id, dict):
             file_id = file_id['links']['self']
-        response = self._api.get(file_id, **kwargs)
+        response = self._req.get(file_id, **kwargs)
         return response.json()
     
     def delete_deposition_file(self, file_id: Union[str,Dict], **kwargs) -> None:
@@ -782,7 +763,7 @@ class _APIZenodo:
         """ 
         if isinstance(file_id, dict):
             file_id = file_id['links']['self']
-        self._api.delete(file_id, **kwargs)
+        self._req.delete(file_id, **kwargs)
     
     def checksum_deposition_file(self, file_id: Union[str,Dict], **kwargs) -> str:
         """Retrieves the checksum of a specific file of a deposition from the Zenodo API. 
@@ -803,6 +784,10 @@ class _APIZenodo:
         if not isinstance(file_id, dict) or 'checksum' not in file_id:
             file_id = self.retrieve_deposition_file(file_id, **kwargs)
         return file_id['checksum'].lstrip('md5:')
+    
+    @property
+    def request(self) -> _APIRequest:
+        return self._req
 
 
 class Depositions:
@@ -929,73 +914,98 @@ class Depositions:
         return __dataset__.Deposition(self._api, data)
 
 
-class License:
-    def __init__(self, data) -> None:
-        self._data = data
-    
-    def __repr__(self) -> str:
-        return str(dict(id=self.id, title=self.title))
-    
-    @property
-    def id(self):
-        if 'id' in self._data:
-            return self._data['id']
-    
-    @property
-    def title(self):
-        if 'title' in self._data:
-            return self._data['title']
-
-class _PagedData:
-    def __init__(self, data) -> None:
-        self._data = data
-    
-    def __repr__(self) -> str:
-        return str(self.hits)
-    
-    def _new(self, value: Dict[str,Any]) -> Dict[str,Any]:
-        return value
-    
-    @property
-    def hits(self):
-        if 'hits' in self._data and 'hits' in self._data['hits']:
-            return [self._new(item) for item in self._data['hits']['hits']]
-    
-    @property
-    def total_hits(self):
-        if 'hits' in self._data and 'total' in self._data['hits']:
-            return self._data['hits']['total']
-    
-    @property
-    def links(self):
-        if 'links' in self._data:
-            return self._data['links']
-    
-    @property
-    def next_url(self):
-        if self.links is not None and 'next' in self.links:
-            return self.links['next']
-
-class LicensesPage(_PagedData):
-    def __init__(self, data) -> None:
+class License(dict):
+    def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data)
     
-    def hits(self):
-        page = super().hits
-        return [License(item) for item in page]
-            
-class Vocabularies:
+    def __repr__(self) -> str:
+        return str(self['id'])
+
+
+class _PagedData:
+    def __init__(self, page: Dict[str,Any], api: Zenodo) -> None:
+        self._start_page = page
+        self._api = api
+        self._pages_iter: Iterator[Dict[str,Any]] = None
+        self._page: Dict[str,Any] = None
+        self._num_pages = 0
+        self.first_page()
+        if len(self) > 0:
+            self._num_pages = self.total / len(self)
+    
+    def __repr__(self) -> str:
+        items = [item['id'] for item in self.data['hits']['hits']]
+        return str(dict(total=self.total, items=items))
+    
+    def __len__(self):
+        return len(self.data['hits']['hits'])
+    
+    def __getitem__(self, key: int) -> Dict[str,Any]:
+        return self._item(self.data['hits']['hits'][key])
+    
+    def __iter__(self) -> Iterator[Dict[str,Any]]:
+        for license in self.data['hits']['hits']:
+            yield self._item(license)
+    
+    def _item(self, item: Dict[str,Any]) -> Dict[str,Any]:
+        return item
+    
+    def first_page(self) -> Self:
+        self._pages_iter = self._api.api.iter_pagination(self._start_page, limit=1)
+        self._page = next(self._pages_iter)
+        return self
+    
+    def next_page(self) -> Self:
+        if self._pages_iter is None:
+            self._pages_iter = self._api.api.iter_pagination(self._start_page, limit=1)
+        self._page = next(self._pages_iter)
+        return self
+    
+    @property
+    def data(self) -> Dict[str,Any]:
+        if self._page is None:
+            self.next_page()
+        return self._page
+    
+    @property
+    def total(self) -> int:
+        return self.data['hits']['total']
+    
+    @property
+    def links(self) -> Dict[str,str]:
+        return self.data['links']
+    
+    @property
+    def pages(self) -> Iterator[Dict[str,Any]]:
+        yield self.first_page()
+        while True:
+            yield self.next_page()
+    
+    @property
+    def num_pages(self) -> int:
+        return self._num_pages
+
+
+class LicensesPage(_PagedData):
+    def __init__(self, page: Dict[str,Any], api: Zenodo) -> None:
+        super().__init__(page, api)
+    
+    def _item(self, item: Dict[str,Any]) -> License:
+        return License(item)
+
+
+class Licenses:
     """Interacting with licenses on the Zenodo API. 
     
     The Vocabularies class implements `vocabularies` endpoint of the Zenodo API. This class is 
     used by the `Zenodo` class to perform vocabularies queries on Zenodo API.
-
+    
     Args:
         api (Zenodo): The Zenodo instance used to interact with Zenodo API.
     
     Examples:
         
-        1. Accessing the instance of the Vocabularies class:
+        1. Accessing the instance of the Licenses class:
         
         >>> from zen import Zenodo
         >>> zen = Zenodo(url=Zenodo.sandbox_url, api_token='your_api_token')
@@ -1003,20 +1013,18 @@ class Vocabularies:
         
         2. Retrieving a list of licenses that match a specific query:
         
-        >>> zen.vocabularies.list(type='licenses', q="cc", size=25, page=2)
+        >>> zen.vocabularies.list(type='licenses', q='cc', size=25, page=2)
         
         3. Retrieving a Zenodo license:
         
         >>> zen.vocabularies.retrieve(type='license', id='cc-zero')
     
     """ 
-    types = ['languages', 'licenses', 'resourcetypes']
-    
     def __init__(self, api: Zenodo) -> None:
         self._api = api
     
-    def list(self, type: str, q: Optional[str]=None, tags: Optional[str]=None, page: Optional[int]=None, 
-             size: Optional[int]=None) -> List[Deposition]:
+    def list(self, q: Optional[str]=None, page: Optional[int]=None, 
+             size: Optional[int]=None) -> LicensesPage:
         """Retrieve a list of licenses from Zenodo.
         
         This method searches licenses registered in Zenodo. It provides a streamlined way to 
@@ -1024,25 +1032,20 @@ class Vocabularies:
         maximum number of licenses per page, and the page number to retrieve.
         
         Args: 
-            type (str): Vocabulary (one of languages, licenses or resourcetypes)
             q (Optional[str]=None): The Elasticsearch query to filter the licenses.
             page (Optional[int]=None): The page number of pagination. 
             size (Optional[int]=None): The maximum number of licenses to retrieve per page.
         
         Returns: 
-            List[Deposition]: A list of license dictionary representing the retrieved licenses. 
+            LicensesPage: The first page of the licenses list. 
         
         """ 
-        if not isinstance(type, str):
-            raise TypeError('Invalid `type` parameter. Expecting a `str` but got a ' +
-                            f'`{__sys__.type(type)}` instead.')
-        
         # Builds the query
-        query = dict(q=q, tags=tags, page=page, size=size)
+        query = dict(q=q, page=page, size=size)
         query = {k: v for k, v in query.items() if v is not None}
         # Prepare for pagination
-        page_results = self._api.api.list_vocabularies(type, query)
-        return page_results
+        page_results = self._api.api.list_licenses(query)
+        return LicensesPage(page_results, self._api)
     
     def retrieve(self, deposition: Union[Deposition,Dict[str,Any],int]) -> Deposition:
         """Retrieves a specific deposition from the Zenodo API.
