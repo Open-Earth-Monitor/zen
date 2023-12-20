@@ -1047,15 +1047,15 @@ class Licenses:
         page_results = self._api.api.list_licenses(query)
         return LicensesPage(page_results, self._api)
     
-    def retrieve(self, deposition: Union[Deposition,Dict[str,Any],int]) -> Deposition:
-        """Retrieves a specific deposition from the Zenodo API.
+    def retrieve(self, license: Union[Deposition,Dict[str,Any],int]) -> Deposition:
+        """Retrieves a specific license from the Zenodo API.
         
         Args: 
-            deposition (Union[Deposition,Dict[str,Any],int]): The ID of the deposition to 
-                retrieve, or a dictionary containing the deposition information. 
+            license (Union[Deposition,Dict[str,Any],int]): The ID of the license to 
+                retrieve, or a dictionary containing the license information. 
         
         Returns: 
-            Deposition: A Deposition object representing the retrieved deposition. 
+            License: A Deposition object representing the retrieved deposition. 
         
         """ 
         if isinstance(deposition, __dataset__.Deposition):
