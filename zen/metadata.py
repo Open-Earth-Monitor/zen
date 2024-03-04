@@ -130,6 +130,10 @@ class _MetaBaseList(_MetaBase):
         super().__init__(data, key)
         self._data: Dict[str,List[Any]] = self._data
     
+    def clear(self) -> Self:
+        self.set([])
+        return self
+    
     def add(self, *args, **kwargs) -> Self:
         if not self._key in self._data:
             self._data[self._key] = list()
@@ -264,6 +268,17 @@ class Creators(_MetaBaseListObject):
     
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'creators')
+    
+    def clear(self) -> Creators:
+        """Clears the creators list.
+        
+        Starts a new empty creators list.
+        
+        Returns:
+            Creators: An empty Creators object.
+        
+        """
+        return super().clear()
     
     def add(self, name: str, affiliation: Optional[str]=None, 
             orcid: Optional[str]=None, gnd: Optional[str]=None) -> Creators:
@@ -507,6 +522,17 @@ class RelatedIdent(_MetaBaseListObject):
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'related_identifiers')
     
+    def clear(self) -> RelatedIdent:
+        """Clears the related identifier list.
+        
+        Starts a new empty related idenfier list.
+        
+        Returns:
+            RelatedIdent: An empty RelatedIdent object.
+        
+        """
+        return super().clear()
+    
     def add(self, identifier: str, relation: str, resource_type: str) -> RelatedIdent:
         """Add a new related identifier entry to the list.
 
@@ -583,6 +609,17 @@ class Contributors(_MetaBaseListObject):
     
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'contributors')
+    
+    def clear(self) -> Contributors:
+        """Clears the contributors list.
+        
+        Starts a new empty contributors list.
+        
+        Returns:
+            Contributors: An empty Contributors object.
+        
+        """
+        return super().clear()
     
     def add(self, type: str, name: str, affiliation: Optional[str]=None, 
             orcid: Optional[str]=None, gnd: Optional[str]=None) -> Contributors:
@@ -675,6 +712,17 @@ class Communities(_MetaBaseListObject):
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'communities')
     
+    def clear(self) -> Communities:
+        """Clears the community identifier list.
+        
+        Starts a new empty community identifier list.
+        
+        Returns:
+            Communities: An empty Communities object.
+        
+        """
+        return super().clear()
+    
     def add(self, identifier: str) -> Communities:
         """Add a community identifier entry to the list.
         
@@ -712,6 +760,17 @@ class Grants(_MetaBaseListObject):
         
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'grants')
+    
+    def clear(self) -> Grants:
+        """Clears the grant identifier list.
+        
+        Starts a new empty grant identifier list.
+        
+        Returns:
+            Grants: An empty Grants object.
+        
+        """
+        return super().clear()
     
     def add(self, id: str) -> Grants:
         """Add a grant identifier entry to the list
@@ -753,6 +812,17 @@ class Subjects(_MetaBaseListObject):
         
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'subjects')
+    
+    def clear(self) -> Subjects:
+        """Clears the subject list.
+        
+        Starts a new empty subject list.
+        
+        Returns:
+            Subjects: An empty Subjects object.
+        
+        """
+        return super().clear()
     
     def add(self, term: str, identifier: str, scheme: Optional[str]=None) -> Subjects:
         """Add a subject entry to the list.
@@ -798,6 +868,17 @@ class Locations(_MetaBaseListObject):
         
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'locations')
+    
+    def clear(self) -> Locations:
+        """Clears the location list.
+        
+        Starts a new empty location list.
+        
+        Returns:
+            Locations: An empty Locations object.
+        
+        """
+        return super().clear()
     
     def add(self, place: str, lat: Optional[float]=None, lon: Optional[float]=None, 
             description: Optional[str]=None) -> Locations:
@@ -862,7 +943,18 @@ class Dates(_MetaBaseListObject):
         return super(cls, cls).new(type=type, start=start, end=end, description=description)
     
     def __init__(self, data: Dict[str,Any]) -> None:
-        super().__init__(data, 'locations')
+        super().__init__(data, 'dates')
+    
+    def clear(self) -> Dates:
+        """Clears the date list.
+        
+        Starts a new empty date list.
+        
+        Returns:
+            Dates: An empty Dates object.
+        
+        """
+        return super().clear()
     
     def add(self, type: str, start: Optional[str]=None, end: Optional[str]=None, 
             description: Optional[str]=None) -> Dates:
@@ -914,6 +1006,17 @@ class ThesisSupervisors(_MetaBaseListObject):
     
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'thesis_supervisors')
+    
+    def clear(self) -> ThesisSupervisors:
+        """Clears the supervisor list.
+        
+        Starts a new empty supervisor list.
+        
+        Returns:
+            ThesisSupervisors: An empty ThesisSupervisors object.
+        
+        """
+        return super().clear()
     
     def add(self, name: str, affiliation: Optional[str]=None, 
             orcid: Optional[str]=None, gnd: Optional[str]=None) -> ThesisSupervisors:
