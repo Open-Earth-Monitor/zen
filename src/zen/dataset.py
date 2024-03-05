@@ -122,6 +122,7 @@ from datetime import datetime
 import zen.api as __api__
 import zen.metadata as __metadata__
 import zen.utils as __utils__
+import json
 import os
 import re
 import requests
@@ -1376,7 +1377,7 @@ class DepositionFiles(_FileDataset):
             try:
                 self.list()
                 super()._revalidate()
-            except requests.JSONDecodeError as e:
+            except json.JSONDecodeError as e:
                 pass
     
     def list(self) -> Self:
@@ -1419,7 +1420,7 @@ class DepositionFiles(_FileDataset):
             try:
                 self._deposition.api.api.create_deposition_file(self._deposition.id, file, 
                                                                 bucket_filename)
-            except requests.JSONDecodeError as e:
+            except json.JSONDecodeError as e:
                 pass
         finally:
             if tempfile is not None:
@@ -1435,7 +1436,7 @@ class DepositionFiles(_FileDataset):
         """ 
         try:
             self._deposition.api.api.delete_deposition_file(file)
-        except requests.JSONDecodeError as e:
+        except json.JSONDecodeError as e:
             pass
         finally:
             self.invalidate()
@@ -1568,7 +1569,7 @@ class Deposition(_BaseDataset):
             metadata = metadata.render(replacements)
         try:
             self.__init__(self._api, self._api.api.update_deposition(self._data['id'], metadata))
-        except requests.JSONDecodeError as e:
+        except json.JSONDecodeError as e:
             self._files.invalidate()
         return self
     
@@ -1577,7 +1578,7 @@ class Deposition(_BaseDataset):
         """ 
         try:
             self._api.api.delete_deposition(self._data['id'])
-        except requests.JSONDecodeError as e:
+        except json.JSONDecodeError as e:
             pass
     
     def publish(self) -> Self:
@@ -1589,7 +1590,7 @@ class Deposition(_BaseDataset):
         """ 
         try:
             self.__init__(self._api, self._api.api.publish_deposition(self._data['id']))
-        except requests.JSONDecodeError as e:
+        except json.JSONDecodeError as e:
             self._files.invalidate()
         return self
     
@@ -1602,7 +1603,7 @@ class Deposition(_BaseDataset):
         """ 
         try:
             self.__init__(self._api, self._api.api.edit_deposition(self._data['id']))
-        except requests.JSONDecodeError as e:
+        except json.JSONDecodeError as e:
             self._files.invalidate()
         return self
     
@@ -1615,7 +1616,7 @@ class Deposition(_BaseDataset):
         """ 
         try:
             self.__init__(self._api, self._api.api.discard_deposition(self._data['id']))
-        except requests.JSONDecodeError as e:
+        except json.JSONDecodeError as e:
             self._files.invalidate()
         return self
     
@@ -1628,7 +1629,7 @@ class Deposition(_BaseDataset):
         """ 
         try:
             self.__init__(self._api, self._api.api.new_version_deposition(self._data['id']))
-        except requests.JSONDecodeError as e:
+        except json.JSONDecodeError as e:
             self._files.invalidate()
         return self
     
