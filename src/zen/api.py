@@ -925,6 +925,81 @@ class Depositions:
         return __dataset__.Deposition(self._api, data)
 
 
+class Licenses:
+    """Interacting with licenses on the Zenodo API. 
+    
+    The Licenses class simplifies interactions with the Zenodo API. It is utilized to give 
+    an intuitive way to explore Zenodo API licenses, making it easier to list and retrieve
+    licenses vocabularies.
+    
+    It is used by the Zenodo class to perform various Zenodo API operations, such as listing 
+    supported licenses and facilitating advanced searches based on different criteria.
+
+    Args:
+        api (Zenodo): The Zenodo instance used to interact with Zenodo API.
+    
+    Examples:
+        
+        1. Accessing the instance of the Deposition class:
+        
+        >>> from zen import Zenodo
+        >>> zen = Zenodo(url=Zenodo.sandbox_url, api_token='your_api_token')
+        >>> zen.licenses  # Instance of class Licenses
+        
+        2. Retrieving a list of licenses that match a specific query:
+        
+        >>> zen.licenses.list(q="cc", sort="bestmatch", size=10)
+        
+        3. Retrieving a Zenodo license:
+        
+        >>> zen.licenses.retrieve('cc-zero')
+    
+    """ 
+    def __init__(self, api: Zenodo) -> None:
+        self._api = api
+    
+    def list(self, q: Optional[str]=None, page: Optional[int]=None, 
+             size: Optional[int]=None) -> List[Deposition]:
+        """Retrieve a list of licenses from Zenodo.
+        
+        This method searches licenses registered in Zenodo. It provides a streamlined way to 
+        query and filter licenses based on specific criteria, including search terms, and the 
+        maximum number of licenses per page, and the page number to retrieve.
+        
+        Args: 
+            q (Optional[str]=None): The Elasticsearch query to filter the licenses.
+            page (Optional[int]=None): The page number of pagination. 
+            size (Optional[int]=None): The maximum number of licenses to retrieve per page.
+        
+        Returns: 
+            List[Deposition]: A list of license dictionary representing the retrieved licenses. 
+        
+        """ 
+        # Builds the query
+        query = dict(q=q, page=page, size=size)
+        query = {k: v for k, v in query.items() if v is not None}
+        # Prepare for pagination
+        page_results = self._api.api.list_depositions(query)
+        return page_results
+        return [item for item in items]
+    
+    def retrieve(self, deposition: Union[Deposition,Dict[str,Any],int]) -> Deposition:
+        """Retrieves a specific deposition from the Zenodo API.
+        
+        Args: 
+            deposition (Union[Deposition,Dict[str,Any],int]): The ID of the deposition to 
+                retrieve, or a dictionary containing the deposition information. 
+        
+        Returns: 
+            Deposition: A Deposition object representing the retrieved deposition. 
+        
+        """ 
+        if isinstance(deposition, __dataset__.Deposition):
+            deposition = deposition.id
+        data = self._api.api.retrieve_deposition(deposition)
+        return __dataset__.Deposition(self._api, data)
+
+
 class Zenodo:
     """Interact with the Zenodo API.
     
