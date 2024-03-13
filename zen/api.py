@@ -280,7 +280,7 @@ class _APIRequest:
         return response
 
 
-class _APIZenodo:
+class APIZenodo:
     """Interact with Zenodo API.
     
     This class provides methods to interact with various aspects of the Zenodo API, such as 
@@ -1047,7 +1047,7 @@ class Licenses:
         page_results = self._api.api.list_licenses(query)
         return LicensesPage(page_results, self._api)
     
-    def retrieve(self, license: Union[Dict[str,Any],int]) -> Deposition:
+    def retrieve(self, license: Union[Dict[str,Any],int]) -> License:
         """Retrieves a specific license from the Zenodo API.
         
         Args: 
@@ -1058,10 +1058,10 @@ class Licenses:
             License: A License object representing the retrieved license. 
         
         """ 
-        if isinstance(deposition, dict):
-            license = deposition.id
-        data = self._api.api.retrieve_deposition(deposition)
-        return __dataset__.Deposition(self._api, data)
+        if isinstance(license, dict):
+            license = license.id
+        data = self._api.api.retrieve_license(license)
+        return License(data)
 
 
 class Zenodo:
@@ -1114,13 +1114,13 @@ class Zenodo:
         if headers is not None and not isinstance(headers, dict):
             raise TypeError('Invalid `headers` parameter. Expecting a `dict` but got a ' +
                             f'{type(headers)} instead.')
-        self._api = _APIZenodo(url, token, headers)
+        self._api = APIZenodo(url, token, headers)
         self._depositions = Depositions(self)
         self._records = None
         self._licenses = Licenses(self)
     
     @property
-    def api(self) -> _APIZenodo:
+    def api(self) -> APIZenodo:
         """The internal API object.
         """ 
         return self._api
