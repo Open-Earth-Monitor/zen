@@ -338,6 +338,7 @@ class LocalFile(BaseFile):
                 if not os.path.isdir(tempdir):
                     os.makedirs(tempdir)
                 tempfile = os.path.join(tempdir, os.path.basename(self['filename']))
+                print(f'Computing checksum of file: {url}')
                 url = __utils__.download_file(url, tempfile)
             if self.checksum is None:
                 # checksum is erased whenever self.update_metadata() is called and the local 
