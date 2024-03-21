@@ -333,7 +333,7 @@ class LocalFile(BaseFile):
             url = self.url
             tempfile = None
             self.update_metadata()
-            if self.is_remote:
+            if self.is_remote and self.checksum is None:
                 tempdir = os.path.join(os.getcwd(), '.zen')
                 if not os.path.isdir(tempdir):
                     os.makedirs(tempdir)
@@ -347,7 +347,7 @@ class LocalFile(BaseFile):
                 # upload only if forced, or filename is not in the deposition, or the checksums differ.
                 deposition.files.create(url)
         finally:
-            if self.is_remote:
+            if tempfile is not None:
                 os.remove(tempfile)
         return self
     
