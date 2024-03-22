@@ -335,6 +335,7 @@ class LocalFile(BaseFile):
             self.update_metadata()
             print(f'Processing file: {url}')
             print(f'File checksum is: {self.checksum}')
+            print(f'Is file is deposition {deposition.id}: {self not in deposition.files}')
             if self.is_remote and self.checksum is None:
                 tempdir = os.path.join(os.getcwd(), '.zen')
                 if not os.path.isdir(tempdir):
