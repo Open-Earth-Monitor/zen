@@ -336,14 +336,11 @@ class LocalFile(BaseFile):
             url = self.url
             tempfile = None
             self.update_metadata()
-            print(f'Processing file: {url}')
-            print(f'File checksum is: {self.checksum}')
             if self.is_remote and self.checksum is None:
                 tempdir = os.path.join(os.getcwd(), '.zen')
                 if not os.path.isdir(tempdir):
                     os.makedirs(tempdir)
                 tempfile = os.path.join(tempdir, os.path.basename(self['filename']))
-                print(f'Computing file checksum...')
                 url = __utils__.download_file(url, tempfile)
             if self.checksum is None:
                 # checksum is erased whenever self.update_metadata() is called and the local 
