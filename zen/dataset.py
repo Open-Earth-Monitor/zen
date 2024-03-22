@@ -336,6 +336,7 @@ class LocalFile(BaseFile):
             url = self.url
             tempfile = None
             self.update_metadata()
+            print(f'Processing file: {url}')
             if self.is_remote and self.checksum is None:
                 tempdir = os.path.join(os.getcwd(), '.zen')
                 if not os.path.isdir(tempdir):
