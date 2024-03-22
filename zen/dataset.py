@@ -127,6 +127,8 @@ import os
 import re
 import requests
 import tqdm
+import time
+import random
 
 Zenodo = __api__.Zenodo
 
@@ -309,7 +311,8 @@ class LocalFile(BaseFile):
                 del self['checksum']
             self.filedate = filedate
     
-    def upload(self, deposition: Deposition, force: bool=False) -> Self:
+    def upload(self, deposition: Deposition, force: bool=False, max_retries: int=15, 
+               min_delay: int=10, max_delay: int=60) -> Self:
         """Uploads the local file to a Zenodo deposition.
         
         Uploads the local file to a Zenodo deposition, updating its metadata in the process. If the 
@@ -335,13 +338,13 @@ class LocalFile(BaseFile):
             self.update_metadata()
             print(f'Processing file: {url}')
             print(f'File checksum is: {self.checksum}')
-            print(f'Is file is deposition {deposition.id}: {self not in deposition.files}')
+            print(f'File in deposition: {self in deposition.files}')
             if self.is_remote and self.checksum is None:
                 tempdir = os.path.join(os.getcwd(), '.zen')
                 if not os.path.isdir(tempdir):
                     os.makedirs(tempdir)
                 tempfile = os.path.join(tempdir, os.path.basename(self['filename']))
-                print(f'Computing checksum...')
+                print(f'Computing file checksum...')
                 url = __utils__.download_file(url, tempfile)
             if self.checksum is None:
                 # checksum is erased whenever self.update_metadata() is called and the local 
@@ -349,7 +352,21 @@ class LocalFile(BaseFile):
                 self.checksum = __utils__.checksum(url, 'md5')
             if force or self not in deposition.files:
                 # upload only if forced, or filename is not in the deposition, or the checksums differ.
-                deposition.files.create(url)
+                retries = 0
+                while True:
+                    try:
+                        deposition.files.create(url)
+                        break
+                    except Exception as e:
+                        print(f"Attempt {retries + 1} failed:", e)
+                        if retries < max_retries - 1:
+                            # Generate a random time delay between min_delay and max_delay seconds
+                            random_delay = random.randint(min_delay, max_delay)
+                            print(f"Retrying in {random_delay} seconds...")
+                            time.sleep(random_delay)  # Wait for the random delay
+                        else:
+                            raise RuntimeError("Max retries exceeded")  
+                        retries += 1
         finally:
             if tempfile is not None:
                 os.remove(tempfile)
@@ -733,7 +750,7 @@ class LocalFiles(_FileDataset):
         with specific values, allowing you to create a set of files with structured names. For 
         example, if the template is 'file{index}.csv', expanding it, for example, calling 
         `expand(index=list(range(12)))` would result in file names like 'file0.csv', 'file1.csv', ... 
-        and 'file11.csv'. After expantion, each expanded placeholder value is stored in 'properties' 
+        and 'file11.csv'. After expansion, each expanded placeholder value is stored in 'properties' 
         key entry of each file.
         
         Args:
@@ -1471,7 +1488,7 @@ class Deposition(_BaseDataset):
     specific Zenodo depositions using the Zenodo API.
     
     Args:
-        api (Zenodo): The Zenodo instance used to interect with Zenodo API.
+        api (Zenodo): The Zenodo instance used to interact with Zenodo API.
         data (Dict[str,Any]): The deposition data, including 'id', 'metadata', 'files', 
             and 'links' entries.
     
