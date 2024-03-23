@@ -865,7 +865,7 @@ class LocalFiles(_FileDataset):
             api = Zenodo(url, token, headers)
             if dataset.deposition is None:
                 if not create_if_not_exists:
-                    raise ValueError('No deposition is binded with current dataset. Please, ' +
+                    raise ValueError('No deposition is linked with current dataset. Please, ' +
                                      'provide a valid deposition to `deposition` parameter, or ' +
                                      'inform `create_if_not_exists=True` to create a new ' +
                                      'deposition.')
