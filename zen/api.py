@@ -783,7 +783,9 @@ class APIZenodo:
         """ 
         if not isinstance(file_id, dict) or 'checksum' not in file_id:
             file_id = self.retrieve_deposition_file(file_id, **kwargs)
-        return file_id['checksum'].lstrip('md5:')
+        if file_id['checksum'].startswith('md5:'):
+            return file_id['checksum'][4:]
+        return file_id['checksum']
     
     @property
     def request(self) -> _APIRequest:
