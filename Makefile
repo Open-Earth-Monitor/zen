@@ -6,7 +6,7 @@
 SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SPHINXAPIDOC  ?= sphinx-apidoc
-SOURCEDIR     = src
+SOURCEDIR     = zen
 BUILDDIR      = sphinx/_build
 DOCSDIR       = sphinx
 

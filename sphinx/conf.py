@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'zen'
-copyright = '2023, OpenGeoHub'
+copyright = '2024, OpenGeoHub'
 author = 'Rolf Simoes'
 
 # -- General configuration ---------------------------------------------------
@@ -15,7 +15,8 @@ author = 'Rolf Simoes'
 
 extensions = ['sphinx.ext.napoleon']
 
-templates_path = ['_templates']
+#templates_path = ['_templates']
+templates_path = []
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # -- Options for HTML output -------------------------------------------------
