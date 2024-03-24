@@ -6,7 +6,7 @@
 SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SPHINXAPIDOC  ?= sphinx-apidoc
-SOURCEDIR     = .
+SOURCEDIR     = zen
 BUILDDIR      = sphinx/_build
 DOCSDIR       = sphinx
 
@@ -18,7 +18,7 @@ help:
 
 # Build Sphinx documentation
 docs:
-	@$(SPHINXAPIDOC) -f -o "$(DOCSDIR)" "$(SOURCEDIR)"
+	@$(SPHINXAPIDOC) -o "$(DOCSDIR)" "$(SOURCEDIR)"
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
