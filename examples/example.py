@@ -1,32 +1,36 @@
-from zen.dataset import Dataset, Deposition, Zenodo
+# To create your personal token
+# Please, go to to https://zenodo.org or https://sandbox.zenodo.org
+my_token = 'your_api_token'
 
-# Define the Zenodo access token
-access_token = 'YOUR_ZENODO_ACCESS_TOKEN'  # Replace with your actual access token
+## step 1 - create a local dataset
 
-# Create a new dataset associated with a new deposition
-dataset = Dataset('dataset.json', url=Zenodo.sandbox, token=access_token)
+from zen import LocalFiles
+ds = LocalFiles(['examples/file1.csv', 'examples/file2.csv'])
+ds.save('examples/dataset.json')
+print([f.url for f in ds])
 
-# Add local files to the dataset
-local_file_paths = ['file1.txt', 'file2.txt']
-dataset.files.from_files(local_file_paths)
-dataset.files.update_metadata()
+## step 2 - bind a deposition to the local dataset
 
-# Update the dataset metadata
-dataset.save()
+from zen import Zenodo
+dep = ds.get_deposition(url=Zenodo.sandbox_url, token=my_token)
+dep.metadata.upload_type = 'dataset'
+dep.metadata.title = 'Example dataset'
+dep.metadata.description = 'Files from index {index_min} to {index_max}.'
+dep.update(replacements={'index_min': 1, 'index_max': 3})
 
-# Access the deposition and its files directly
-print(f'Deposition ID: {dataset.deposition.id}')
-print(f'Files: {dataset.files.data}')
+## step 3 - upload and publish your data to zenodo
 
-# Upload the local files to the Zenodo deposition
-dataset.files.upload()
+from zen import LocalFiles, Zenodo
+ds = LocalFiles.from_file('examples/dataset.json')
+dep = ds.get_deposition(url=Zenodo.sandbox_url, token=my_token)
+ds.upload(dep)
+dep.publish()
 
-# Update the deposition metadata
-dataset.deposition.update(metadata)
+## step 4 - updating your data
 
-# Update the dataset metadata after the files are uploaded
-dataset.save()
-
-# Access the deposition after the files are uploaded
-deposition_after_upload = zenodo.depositions.get(dataset.deposition.id)
-print(f'Deposition ID after upload: {deposition_after_upload.id}')
+ds = LocalFiles.from_file('examples/dataset.json')
+ds.add(['examples/file3.csv'])
+dep = ds.get_deposition(url=Zenodo.sandbox_url, token=my_token)
+dep.new_version()
+ds.upload(dep)
+dep.publish()

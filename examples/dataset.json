@@ -1,32 +1,32 @@
 {
     "zenodo": {
-        "created": "2023-11-17T14:40:24.747157+00:00",
-        "modified": "2023-11-17T14:40:24.799982+00:00",
-        "id": 51,
-        "conceptrecid": "50",
+        "created": "2023-11-20T15:55:01.516288+00:00",
+        "modified": "2023-11-20T15:55:01.564551+00:00",
+        "id": 314,
+        "conceptrecid": "313",
         "metadata": {
             "access_right": "open",
             "prereserve_doi": {
-                "doi": "10.5281/zenodo.51",
-                "recid": 51
+                "doi": "10.5281/zenodo.314",
+                "recid": 314
             }
         },
         "title": "",
         "links": {
-            "self": "https://sandbox.zenodo.org/api/deposit/depositions/51",
-            "html": "https://sandbox.zenodo.org/deposit/51",
+            "self": "https://sandbox.zenodo.org/api/deposit/depositions/314",
+            "html": "https://sandbox.zenodo.org/deposit/314",
             "badge": "https://sandbox.zenodo.org/badge/doi/.svg",
-            "files": "https://sandbox.zenodo.org/api/deposit/depositions/51/files",
-            "bucket": "https://sandbox.zenodo.org/api/files/19bb294d-d9ff-4ea1-95d4-cd051fd81d1f",
-            "latest_draft": "https://sandbox.zenodo.org/api/deposit/depositions/51",
-            "latest_draft_html": "https://sandbox.zenodo.org/deposit/51",
-            "publish": "https://sandbox.zenodo.org/api/deposit/depositions/51/actions/publish",
-            "edit": "https://sandbox.zenodo.org/api/deposit/depositions/51/actions/edit",
-            "discard": "https://sandbox.zenodo.org/api/deposit/depositions/51/actions/discard",
-            "newversion": "https://sandbox.zenodo.org/api/deposit/depositions/51/actions/newversion",
-            "registerconceptdoi": "https://sandbox.zenodo.org/api/deposit/depositions/51/actions/registerconceptdoi"
+            "files": "https://sandbox.zenodo.org/api/deposit/depositions/314/files",
+            "bucket": "https://sandbox.zenodo.org/api/files/faa35063-3951-4797-b539-991c133d90ad",
+            "latest_draft": "https://sandbox.zenodo.org/api/deposit/depositions/314",
+            "latest_draft_html": "https://sandbox.zenodo.org/deposit/314",
+            "publish": "https://sandbox.zenodo.org/api/deposit/depositions/314/actions/publish",
+            "edit": "https://sandbox.zenodo.org/api/deposit/depositions/314/actions/edit",
+            "discard": "https://sandbox.zenodo.org/api/deposit/depositions/314/actions/discard",
+            "newversion": "https://sandbox.zenodo.org/api/deposit/depositions/314/actions/newversion",
+            "registerconceptdoi": "https://sandbox.zenodo.org/api/deposit/depositions/314/actions/registerconceptdoi"
         },
-        "record_id": 51,
+        "record_id": 314,
         "owner": 29,
         "files": [],
         "state": "unsubmitted",
@@ -40,8 +40,7 @@
             },
             "properties": {},
             "filesize": 34308,
-            "filedate": "2023-10-30T11:08:07.188773",
-            "checksum": "f421d3e99530f4c8173fc7ef60d4a877"
+            "filedate": "2023-11-17T17:05:10.551491"
         },
         {
             "filename": "file2.csv",
@@ -50,18 +49,7 @@
             },
             "properties": {},
             "filesize": 34249,
-            "filedate": "2023-11-14T15:53:30.985671",
-            "checksum": "edc281089341c95484c087c7b0fe8e49"
-        },
-        {
-            "filename": "file3.csv",
-            "links": {
-                "download": "examples/file3.csv"
-            },
-            "properties": {},
-            "filesize": 34182,
-            "filedate": "2023-11-08T15:35:20.408724",
-            "checksum": "83cd8f4423a90b7ff61e471067489a45"
+            "filedate": "2023-11-17T17:05:10.551491"
         }
     ]
 }

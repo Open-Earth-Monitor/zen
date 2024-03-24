@@ -69,7 +69,7 @@ class Placeholder(dict):
     Args:
         name (str): The name of the placeholder.
     
-    Exemples:
+    Examples:
     
         1. Create a metadata for publication with two placeholders ('the_title' and 'the_description')
         
@@ -129,6 +129,10 @@ class _MetaBaseList(_MetaBase):
     def __init__(self, data: Optional[Dict[str,List[Any]]]=None, key: str=None) -> None:
         super().__init__(data, key)
         self._data: Dict[str,List[Any]] = self._data
+    
+    def clear(self) -> Self:
+        self.set([])
+        return self
     
     def add(self, *args, **kwargs) -> Self:
         if not self._key in self._data:
@@ -264,6 +268,17 @@ class Creators(_MetaBaseListObject):
     
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'creators')
+    
+    def clear(self) -> Creators:
+        """Clears the creators list.
+        
+        Empty creators list.
+        
+        Returns:
+            Creators: An empty Creators object.
+        
+        """
+        return super().clear()
     
     def add(self, name: str, affiliation: Optional[str]=None, 
             orcid: Optional[str]=None, gnd: Optional[str]=None) -> Creators:
@@ -467,7 +482,7 @@ class RelatedIdent(_MetaBaseListObject):
         'isCompiledBy',
         'compiles',
         'isVariantFormOf',
-        'isOriginalFormof',
+        'isOriginalFormOf',
         'isIdenticalTo',
         'isAlternateIdentifier',
         'isReviewedBy',
@@ -506,6 +521,17 @@ class RelatedIdent(_MetaBaseListObject):
     
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'related_identifiers')
+    
+    def clear(self) -> RelatedIdent:
+        """Clears the related identifier list.
+        
+        Empty related identifier list.
+        
+        Returns:
+            RelatedIdent: An empty RelatedIdent object.
+        
+        """
+        return super().clear()
     
     def add(self, identifier: str, relation: str, resource_type: str) -> RelatedIdent:
         """Add a new related identifier entry to the list.
@@ -583,6 +609,17 @@ class Contributors(_MetaBaseListObject):
     
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'contributors')
+    
+    def clear(self) -> Contributors:
+        """Clears the contributors list.
+        
+        Empty contributors list.
+        
+        Returns:
+            Contributors: An empty Contributors object.
+        
+        """
+        return super().clear()
     
     def add(self, type: str, name: str, affiliation: Optional[str]=None, 
             orcid: Optional[str]=None, gnd: Optional[str]=None) -> Contributors:
@@ -675,6 +712,17 @@ class Communities(_MetaBaseListObject):
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'communities')
     
+    def clear(self) -> Communities:
+        """Clears the community identifier list.
+        
+        Empty community identifier list.
+        
+        Returns:
+            Communities: An empty Communities object.
+        
+        """
+        return super().clear()
+    
     def add(self, identifier: str) -> Communities:
         """Add a community identifier entry to the list.
         
@@ -712,6 +760,17 @@ class Grants(_MetaBaseListObject):
         
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'grants')
+    
+    def clear(self) -> Grants:
+        """Clears the grant identifier list.
+        
+        Empty grant identifier list.
+        
+        Returns:
+            Grants: An empty Grants object.
+        
+        """
+        return super().clear()
     
     def add(self, id: str) -> Grants:
         """Add a grant identifier entry to the list
@@ -753,6 +812,17 @@ class Subjects(_MetaBaseListObject):
         
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'subjects')
+    
+    def clear(self) -> Subjects:
+        """Clears the subject list.
+        
+        Empty subject list.
+        
+        Returns:
+            Subjects: An empty Subjects object.
+        
+        """
+        return super().clear()
     
     def add(self, term: str, identifier: str, scheme: Optional[str]=None) -> Subjects:
         """Add a subject entry to the list.
@@ -798,6 +868,17 @@ class Locations(_MetaBaseListObject):
         
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'locations')
+    
+    def clear(self) -> Locations:
+        """Clears the location list.
+        
+        Empty location list.
+        
+        Returns:
+            Locations: An empty Locations object.
+        
+        """
+        return super().clear()
     
     def add(self, place: str, lat: Optional[float]=None, lon: Optional[float]=None, 
             description: Optional[str]=None) -> Locations:
@@ -862,7 +943,18 @@ class Dates(_MetaBaseListObject):
         return super(cls, cls).new(type=type, start=start, end=end, description=description)
     
     def __init__(self, data: Dict[str,Any]) -> None:
-        super().__init__(data, 'locations')
+        super().__init__(data, 'dates')
+    
+    def clear(self) -> Dates:
+        """Clears the date list.
+        
+        Empty date list.
+        
+        Returns:
+            Dates: An empty Dates object.
+        
+        """
+        return super().clear()
     
     def add(self, type: str, start: Optional[str]=None, end: Optional[str]=None, 
             description: Optional[str]=None) -> Dates:
@@ -914,6 +1006,17 @@ class ThesisSupervisors(_MetaBaseListObject):
     
     def __init__(self, data: Dict[str,Any]) -> None:
         super().__init__(data, 'thesis_supervisors')
+    
+    def clear(self) -> ThesisSupervisors:
+        """Clears the supervisor list.
+        
+        Empty supervisor list.
+        
+        Returns:
+            ThesisSupervisors: An empty ThesisSupervisors object.
+        
+        """
+        return super().clear()
     
     def add(self, name: str, affiliation: Optional[str]=None, 
             orcid: Optional[str]=None, gnd: Optional[str]=None) -> ThesisSupervisors:
@@ -1052,6 +1155,72 @@ class Metadata(_MetaBaseObject):
         
         """
         return self.data['upload_type']
+    
+    @upload_type.setter
+    def upload_type(self, value: str) -> None:
+        _check_instance(value, str)
+        if value not in Metadata.upload_types:
+            raise ValueError('Invalid `upload_type` parameter. Please, see `Metadata.upload_type` ' +
+                             'attribute for supported options.')
+        self.data['upload_type'] = value
+    
+    @property
+    def publication_type(self) -> str:
+        """Type of the publication (required field, if upload_type='publication').
+        
+        Controlled vocabulary:
+            * annotationcollection: Annotation collection
+            * book: Book
+            * section: Book section
+            * conferencepaper: Conference paper
+            * datamanagementplan: Data management plan
+            * article: Journal article
+            * patent: Patent
+            * preprint: Preprint
+            * deliverable: Project deliverable
+            * milestone: Project milestone
+            * proposal: Proposal
+            * report: Report
+            * softwaredocumentation: Software documentation
+            * taxonomictreatment: Taxonomic treatment
+            * technicalnote: Technical note
+            * thesis: Thesis
+            * workingpaper: Working paper
+            * other: Other
+        
+        """
+        return self.data['publication_type']
+    
+    @upload_type.setter
+    def publication_type(self, value: str) -> None:
+        _check_instance(value, str)
+        if value not in Publication.publication_types:
+            raise ValueError('Invalid `publication_type` parameter. Please, see `Publication.publication_types` ' +
+                             'attribute for supported options.')
+        self.data['publication_type'] = value
+    
+    @property
+    def image_type(self) -> str:
+        """Type of the image (required field, if upload_type='image').
+        
+        Controlled vocabulary:
+            * figure: Figure
+            * plot: Plot
+            * drawing: Drawing
+            * diagram: Diagram
+            * photo: Photo
+            * other: Other
+        
+        """
+        return self.data['image_type']
+    
+    @upload_type.setter
+    def image_type(self, value: str) -> None:
+        _check_instance(value, str)
+        if value not in Image.image_types:
+            raise ValueError('Invalid `image_type` parameter. Please, see `Image.image_types` ' +
+                             'attribute for supported options.')
+        self.data['image_type'] = value
     
     @property
     def title(self) -> str:
