@@ -872,7 +872,7 @@ class Locations(_MetaBaseListObject):
     def clear(self) -> Locations:
         """Clears the location list.
         
-        Starts a new empty location list.
+        Empty location list.
         
         Returns:
             Locations: An empty Locations object.
