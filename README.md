@@ -175,7 +175,7 @@ For detailed usage and additional examples, please refer to the zen
 We welcome contributions! If you would like to contribute to the zen library, please see our [Contributing Guide](CONTRIBUTING.md) for more information.
 
 ## License
-© OpenGeoHub Foundation, 2023. Licensed under the [MIT License](LICENSE).
+© OpenGeoHub Foundation, 2023-2024. Licensed under the [MIT License](LICENSE).
 
 ## Acknowledgements & Funding
 This work is supported by [OpenGeoHub Foundation](https://opengeohub.org/) and has received 

@@ -69,7 +69,7 @@ class Placeholder(dict):
     Args:
         name (str): The name of the placeholder.
     
-    Exemples:
+    Examples:
     
         1. Create a metadata for publication with two placeholders ('the_title' and 'the_description')
         
@@ -272,7 +272,7 @@ class Creators(_MetaBaseListObject):
     def clear(self) -> Creators:
         """Clears the creators list.
         
-        Starts a new empty creators list.
+        Empty creators list.
         
         Returns:
             Creators: An empty Creators object.
@@ -482,7 +482,7 @@ class RelatedIdent(_MetaBaseListObject):
         'isCompiledBy',
         'compiles',
         'isVariantFormOf',
-        'isOriginalFormof',
+        'isOriginalFormOf',
         'isIdenticalTo',
         'isAlternateIdentifier',
         'isReviewedBy',
@@ -525,7 +525,7 @@ class RelatedIdent(_MetaBaseListObject):
     def clear(self) -> RelatedIdent:
         """Clears the related identifier list.
         
-        Starts a new empty related idenfier list.
+        Empty related identifier list.
         
         Returns:
             RelatedIdent: An empty RelatedIdent object.
@@ -613,7 +613,7 @@ class Contributors(_MetaBaseListObject):
     def clear(self) -> Contributors:
         """Clears the contributors list.
         
-        Starts a new empty contributors list.
+        Empty contributors list.
         
         Returns:
             Contributors: An empty Contributors object.
@@ -715,7 +715,7 @@ class Communities(_MetaBaseListObject):
     def clear(self) -> Communities:
         """Clears the community identifier list.
         
-        Starts a new empty community identifier list.
+        Empty community identifier list.
         
         Returns:
             Communities: An empty Communities object.
@@ -764,7 +764,7 @@ class Grants(_MetaBaseListObject):
     def clear(self) -> Grants:
         """Clears the grant identifier list.
         
-        Starts a new empty grant identifier list.
+        Empty grant identifier list.
         
         Returns:
             Grants: An empty Grants object.
@@ -816,7 +816,7 @@ class Subjects(_MetaBaseListObject):
     def clear(self) -> Subjects:
         """Clears the subject list.
         
-        Starts a new empty subject list.
+        Empty subject list.
         
         Returns:
             Subjects: An empty Subjects object.
@@ -872,7 +872,7 @@ class Locations(_MetaBaseListObject):
     def clear(self) -> Locations:
         """Clears the location list.
         
-        Starts a new empty location list.
+        Empty location list.
         
         Returns:
             Locations: An empty Locations object.
@@ -948,7 +948,7 @@ class Dates(_MetaBaseListObject):
     def clear(self) -> Dates:
         """Clears the date list.
         
-        Starts a new empty date list.
+        Empty date list.
         
         Returns:
             Dates: An empty Dates object.
@@ -1010,7 +1010,7 @@ class ThesisSupervisors(_MetaBaseListObject):
     def clear(self) -> ThesisSupervisors:
         """Clears the supervisor list.
         
-        Starts a new empty supervisor list.
+        Empty supervisor list.
         
         Returns:
             ThesisSupervisors: An empty ThesisSupervisors object.
