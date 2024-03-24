@@ -43,7 +43,7 @@ Examples:
         # If some local files has been changed, `upload()` method will detect it. 
         # It uploads just those local files not updated in Zenodo.
         # Calling `get_deposition()` method again just returns the existing deposition
-        # already binded to the current dataset.
+        # already linked to the current dataset.
         # Replace `token` by your actual access token.
         dep = ds.get_deposition(url=Zenodo.sandbox_url, token='your_access_token')
         ds.upload(dep)
@@ -52,7 +52,7 @@ Examples:
         new_local_file_paths = ['examples/file3.csv']
         ds.add(new_local_file_paths)
         
-        # Save to persit changes in local dataset
+        # Save to persist changes in local dataset
         ds.save()
         
         # Interacting with files in Zenodo
@@ -829,9 +829,9 @@ class LocalFiles(_FileDataset):
                        create_if_not_exists: bool=True) -> Deposition:
         """Get the dataset deposition.
         
-        Get the deposition of the dataset. If the dataset has no binded deposition, the `deposition` 
+        Get the deposition of the dataset. If the dataset has no linked deposition, the `deposition` 
         parameter is `None` and the `create_if_not_exists` parameter is `True`, it creates a 
-        new deposition. The binded deposition is saved into dataset file.
+        new deposition. The linked deposition is saved into dataset file.
         
         Args:
             url (str): The base URL of the Zenodo API. 
@@ -843,7 +843,7 @@ class LocalFiles(_FileDataset):
                 deposition.
             deposition (Optional[Union[Deposition,Dict[str,Any],int]]=None): An existing deposition 
                 to bind with the current dataset.
-            create_if_not_exists (bool=True): If there is no deposition binded to the current
+            create_if_not_exists (bool=True): If there is no deposition linked to the current
                 dataset, it creates a new deposition on Zenodo. Ignored if `deposition` parameter
                 is informed.
         
@@ -1518,7 +1518,7 @@ class Deposition(_BaseDataset):
         >>> dep.discard()
     
     """ 
-    def __init__(self, api: Zenodo, data: Dict[str,Any]) -> None:
+    def __init__(self, api: Zenodo, data: Dict[str,Any]) -> None: # type: ignore
         self._api = api
         if 'id' not in data:
             raise ValueError(f"Invalid `data` parameter. Value must have 'id' key.")
@@ -1652,7 +1652,7 @@ class Deposition(_BaseDataset):
         return self
     
     @property
-    def api(self) -> Zenodo:
+    def api(self) -> Zenodo: # type: ignore
         """The Zenodo object to interact with Zenodo API.
         """ 
         return self._api
