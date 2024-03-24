@@ -43,7 +43,7 @@ Examples:
         # If some local files has been changed, `upload()` method will detect it. 
         # It uploads just those local files not updated in Zenodo.
         # Calling `get_deposition()` method again just returns the existing deposition
-        # already binded to the current dataset.
+        # already linked to the current dataset.
         # Replace `token` by your actual access token.
         dep = ds.get_deposition(url=Zenodo.sandbox_url, token='your_access_token')
         ds.upload(dep)
@@ -52,7 +52,7 @@ Examples:
         new_local_file_paths = ['examples/file3.csv']
         ds.add(new_local_file_paths)
         
-        # Save to persit changes in local dataset
+        # Save to persist changes in local dataset
         ds.save()
         
         # Interacting with files in Zenodo
@@ -122,10 +122,13 @@ from datetime import datetime
 import zen.api as __api__
 import zen.metadata as __metadata__
 import zen.utils as __utils__
+import json
 import os
 import re
 import requests
 import tqdm
+import time
+import random
 
 Zenodo = __api__.Zenodo
 
@@ -308,7 +311,8 @@ class LocalFile(BaseFile):
                 del self['checksum']
             self.filedate = filedate
     
-    def upload(self, deposition: Deposition, force: bool=False) -> Self:
+    def upload(self, deposition: Deposition, force: bool=False, max_retries: int=15, 
+               min_delay: int=10, max_delay: int=60) -> Self:
         """Uploads the local file to a Zenodo deposition.
         
         Uploads the local file to a Zenodo deposition, updating its metadata in the process. If the 
@@ -332,7 +336,8 @@ class LocalFile(BaseFile):
             url = self.url
             tempfile = None
             self.update_metadata()
-            if self.is_remote:
+            print(f'Processing file: {url}')
+            if self.is_remote and self.checksum is None:
                 tempdir = os.path.join(os.getcwd(), '.zen')
                 if not os.path.isdir(tempdir):
                     os.makedirs(tempdir)
@@ -344,9 +349,23 @@ class LocalFile(BaseFile):
                 self.checksum = __utils__.checksum(url, 'md5')
             if force or self not in deposition.files:
                 # upload only if forced, or filename is not in the deposition, or the checksums differ.
-                deposition.files.create(url)
+                retries = 0
+                while True:
+                    try:
+                        deposition.files.create(url)
+                        break
+                    except Exception as e:
+                        print(f"Attempt {retries + 1} failed:", e)
+                        if retries < max_retries - 1:
+                            # Generate a random time delay between min_delay and max_delay seconds
+                            random_delay = random.randint(min_delay, max_delay)
+                            print(f"Retrying in {random_delay} seconds...")
+                            time.sleep(random_delay)  # Wait for the random delay
+                        else:
+                            raise RuntimeError("Max retries exceeded")  
+                        retries += 1
         finally:
-            if self.is_remote:
+            if tempfile is not None:
                 os.remove(tempfile)
         return self
     
@@ -728,7 +747,7 @@ class LocalFiles(_FileDataset):
         with specific values, allowing you to create a set of files with structured names. For 
         example, if the template is 'file{index}.csv', expanding it, for example, calling 
         `expand(index=list(range(12)))` would result in file names like 'file0.csv', 'file1.csv', ... 
-        and 'file11.csv'. After expantion, each expanded placeholder value is stored in 'properties' 
+        and 'file11.csv'. After expansion, each expanded placeholder value is stored in 'properties' 
         key entry of each file.
         
         Args:
@@ -810,9 +829,9 @@ class LocalFiles(_FileDataset):
                        create_if_not_exists: bool=True) -> Deposition:
         """Get the dataset deposition.
         
-        Get the deposition of the dataset. If the dataset has no binded deposition, the `deposition` 
+        Get the deposition of the dataset. If the dataset has no linked deposition, the `deposition` 
         parameter is `None` and the `create_if_not_exists` parameter is `True`, it creates a 
-        new deposition. The binded deposition is saved into dataset file.
+        new deposition. The linked deposition is saved into dataset file.
         
         Args:
             url (str): The base URL of the Zenodo API. 
@@ -824,7 +843,7 @@ class LocalFiles(_FileDataset):
                 deposition.
             deposition (Optional[Union[Deposition,Dict[str,Any],int]]=None): An existing deposition 
                 to bind with the current dataset.
-            create_if_not_exists (bool=True): If there is no deposition binded to the current
+            create_if_not_exists (bool=True): If there is no deposition linked to the current
                 dataset, it creates a new deposition on Zenodo. Ignored if `deposition` parameter
                 is informed.
         
@@ -846,7 +865,7 @@ class LocalFiles(_FileDataset):
             api = Zenodo(url, token, headers)
             if dataset.deposition is None:
                 if not create_if_not_exists:
-                    raise ValueError('No deposition is binded with current dataset. Please, ' +
+                    raise ValueError('No deposition is linked with current dataset. Please, ' +
                                      'provide a valid deposition to `deposition` parameter, or ' +
                                      'inform `create_if_not_exists=True` to create a new ' +
                                      'deposition.')
@@ -1376,7 +1395,7 @@ class DepositionFiles(_FileDataset):
             try:
                 self.list()
                 super()._revalidate()
-            except requests.JSONDecodeError as e:
+            except json.JSONDecodeError as e:
                 pass
     
     def list(self) -> Self:
@@ -1419,7 +1438,7 @@ class DepositionFiles(_FileDataset):
             try:
                 self._deposition.api.api.create_deposition_file(self._deposition.id, file, 
                                                                 bucket_filename)
-            except requests.JSONDecodeError as e:
+            except json.JSONDecodeError as e:
                 pass
         finally:
             if tempfile is not None:
@@ -1435,7 +1454,7 @@ class DepositionFiles(_FileDataset):
         """ 
         try:
             self._deposition.api.api.delete_deposition_file(file)
-        except requests.JSONDecodeError as e:
+        except json.JSONDecodeError as e:
             pass
         finally:
             self.invalidate()
@@ -1466,7 +1485,7 @@ class Deposition(_BaseDataset):
     specific Zenodo depositions using the Zenodo API.
     
     Args:
-        api (Zenodo): The Zenodo instance used to interect with Zenodo API.
+        api (Zenodo): The Zenodo instance used to interact with Zenodo API.
         data (Dict[str,Any]): The deposition data, including 'id', 'metadata', 'files', 
             and 'links' entries.
     
@@ -1499,7 +1518,7 @@ class Deposition(_BaseDataset):
         >>> dep.discard()
     
     """ 
-    def __init__(self, api: Zenodo, data: Dict[str,Any]) -> None:
+    def __init__(self, api: Zenodo, data: Dict[str,Any]) -> None: # type: ignore
         self._api = api
         if 'id' not in data:
             raise ValueError(f"Invalid `data` parameter. Value must have 'id' key.")
@@ -1568,7 +1587,7 @@ class Deposition(_BaseDataset):
             metadata = metadata.render(replacements)
         try:
             self.__init__(self._api, self._api.api.update_deposition(self._data['id'], metadata))
-        except requests.JSONDecodeError as e:
+        except json.JSONDecodeError as e:
             self._files.invalidate()
         return self
     
@@ -1577,7 +1596,7 @@ class Deposition(_BaseDataset):
         """ 
         try:
             self._api.api.delete_deposition(self._data['id'])
-        except requests.JSONDecodeError as e:
+        except json.JSONDecodeError as e:
             pass
     
     def publish(self) -> Self:
@@ -1589,7 +1608,7 @@ class Deposition(_BaseDataset):
         """ 
         try:
             self.__init__(self._api, self._api.api.publish_deposition(self._data['id']))
-        except requests.JSONDecodeError as e:
+        except json.JSONDecodeError as e:
             self._files.invalidate()
         return self
     
@@ -1602,7 +1621,7 @@ class Deposition(_BaseDataset):
         """ 
         try:
             self.__init__(self._api, self._api.api.edit_deposition(self._data['id']))
-        except requests.JSONDecodeError as e:
+        except json.JSONDecodeError as e:
             self._files.invalidate()
         return self
     
@@ -1615,7 +1634,7 @@ class Deposition(_BaseDataset):
         """ 
         try:
             self.__init__(self._api, self._api.api.discard_deposition(self._data['id']))
-        except requests.JSONDecodeError as e:
+        except json.JSONDecodeError as e:
             self._files.invalidate()
         return self
     
@@ -1628,12 +1647,12 @@ class Deposition(_BaseDataset):
         """ 
         try:
             self.__init__(self._api, self._api.api.new_version_deposition(self._data['id']))
-        except requests.JSONDecodeError as e:
+        except json.JSONDecodeError as e:
             self._files.invalidate()
         return self
     
     @property
-    def api(self) -> Zenodo:
+    def api(self) -> Zenodo: # type: ignore
         """The Zenodo object to interact with Zenodo API.
         """ 
         return self._api
