@@ -117,6 +117,571 @@ endpoints and parameters.</p></li>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="zen.api.APIZenodo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zen.api.</span></span><span class="sig-name descname"><span class="pre">APIZenodo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zen.api.APIZenodo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Interact with Zenodo API.</p>
+<p>This class provides methods to interact with various aspects of the Zenodo API, such as
+licenses, records, depositions, and more.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_url</strong> (<em>str</em>) – The base URL of the Zenodo API.</p></li>
+<li><p><strong>token</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>=None</em>) – The access token for authorization.</p></li>
+<li><p><strong>params</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>,</em><em>str</em><em>]</em><em>]</em><em>=None</em>) – Additional params to be included in the
+API requests.</p></li>
+<li><p><strong>headers</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>,</em><em>str</em><em>]</em><em>]</em><em>=None</em>) – Additional headers to be included in the
+API requests.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.checksum_deposition_file">
+<span class="sig-name descname"><span class="pre">checksum_deposition_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.checksum_deposition_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the checksum of a specific file of a deposition from the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_id</strong> (<em>Union</em><em>[</em><em>str</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the file to retrieve the checksum for, or a dictionary
+containing the file information.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The checksum of the file.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the
+    API request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.create_deposition">
+<span class="sig-name descname"><span class="pre">create_deposition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.create_deposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new deposition on the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metadata</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>,</em><em>Any</em><em>]</em><em>]</em><em>=None</em>) – The metadata for the new deposition.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the newly created deposition.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the metadata parameter is not a dictionary.</p></li>
+<li><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.create_deposition_file">
+<span class="sig-name descname"><span class="pre">create_deposition_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deposition_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.create_deposition_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new file for a specific deposition on the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deposition_id</strong> (<em>Union</em><em>[</em><em>int</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the deposition to create the file for, or a
+dictionary containing the deposition information.</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – The local file path of the file to upload.</p></li>
+<li><p><strong>bucket_filename</strong> (<em>str</em><em> or </em><em>None</em>) – The desired filename for the file in the deposition’s bucket.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the newly created file.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the specified file does not exist.</p></li>
+<li><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.delete_deposition">
+<span class="sig-name descname"><span class="pre">delete_deposition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deposition_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.delete_deposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a specific deposition from the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deposition_id</strong> (<em>Union</em><em>[</em><em>int</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the deposition to delete, or a dictionary
+containing the deposition information.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.delete_deposition_file">
+<span class="sig-name descname"><span class="pre">delete_deposition_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.delete_deposition_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a specific file of a deposition from the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_id</strong> (<em>Union</em><em>[</em><em>str</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the file to delete, or a dictionary containing the
+file information.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the
+    API request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.discard_deposition">
+<span class="sig-name descname"><span class="pre">discard_deposition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deposition_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.discard_deposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Discards changes of a specific deposition on the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deposition_id</strong> (<em>Union</em><em>[</em><em>int</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the deposition to discard changes, or a
+dictionary containing the deposition information.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the deposition with the discarded changes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.edit_deposition">
+<span class="sig-name descname"><span class="pre">edit_deposition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deposition_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.edit_deposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a specific deposition to the “edit” state on the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deposition_id</strong> (<em>Union</em><em>[</em><em>int</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the deposition to set to “edit”, or a
+dictionary containing the deposition information.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the edited deposition.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.get_deposition_bucket">
+<span class="sig-name descname"><span class="pre">get_deposition_bucket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deposition_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.get_deposition_bucket" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the bucket URL for a specific deposition on the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>deposition_id</strong> (<em>Union</em><em>[</em><em>int</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the deposition, or a dictionary containing the
+deposition information.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The URL of the deposition’s bucket.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.iter_pagination">
+<span class="sig-name descname"><span class="pre">iter_pagination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#zen.api.APIZenodo.iter_pagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates over paginated data from the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>Dict</em><em>[</em><em>str</em><em>,</em><em>Any</em><em>]</em>) – The initial page of data from the API response.</p></li>
+<li><p><strong>limit</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em><em>=None</em>) – The maximum number of pages to retrieve.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An iterator that yields each page of data.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Iterator[Dict[str,Any]]</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.list_deposition_files">
+<span class="sig-name descname"><span class="pre">list_deposition_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deposition_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.list_deposition_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a list of files for a specific deposition from the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deposition_id</strong> (<em>Union</em><em>[</em><em>int</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the deposition, or a dictionary containing the
+deposition information.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the list of files.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.list_depositions">
+<span class="sig-name descname"><span class="pre">list_depositions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.list_depositions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a list of depositions from the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query_args</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>,</em><em>Any</em><em>]</em><em>]</em><em>=None</em>) – Additional query arguments for the API request.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the list of depositions.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If the query_args parameter is not a dictionary.</p></li>
+<li><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.list_licenses">
+<span class="sig-name descname"><span class="pre">list_licenses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.list_licenses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a list of licenses entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query_args</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>,</em><em>Any</em><em>]</em><em>]</em><em>=None</em>) – Additional query arguments for the API request.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the list of licenses entries.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If the <cite>query_args</cite> parameter is not a dictionary.</p></li>
+<li><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.list_records">
+<span class="sig-name descname"><span class="pre">list_records</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.list_records" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a list of records from the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query_args</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>,</em><em>Any</em><em>]</em><em>]</em><em>=None</em>) – Additional query arguments for the API request.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the list of records.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If the query_args parameter is not a dictionary.</p></li>
+<li><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.new_version_deposition">
+<span class="sig-name descname"><span class="pre">new_version_deposition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deposition_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.new_version_deposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new version of a specific deposition on the Zenodo API. Unlike Zenodo API, this
+function returns the new version of the deposition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deposition_id</strong> (<em>Union</em><em>[</em><em>int</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the deposition to create a new version of, or a
+dictionary containing the deposition information.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the newly created version of the deposition.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.publish_deposition">
+<span class="sig-name descname"><span class="pre">publish_deposition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deposition_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.publish_deposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Publishes a specific deposition on the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deposition_id</strong> (<em>Union</em><em>[</em><em>int</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the deposition to publish, or a dictionary
+containing the deposition information.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the published deposition.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.request">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">zen.api._APIRequest</span></em><a class="headerlink" href="#zen.api.APIZenodo.request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.retrieve_deposition">
+<span class="sig-name descname"><span class="pre">retrieve_deposition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deposition_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.retrieve_deposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a specific deposition from the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deposition_id</strong> (<em>Union</em><em>[</em><em>int</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the deposition to retrieve, or a dictionary
+containing the deposition information.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the deposition information.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.retrieve_deposition_file">
+<span class="sig-name descname"><span class="pre">retrieve_deposition_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.retrieve_deposition_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a specific file of a deposition from the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_id</strong> (<em>Union</em><em>[</em><em>str</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the file to retrieve, or a dictionary containing the
+file information.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the file information.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API
+    request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.retrieve_license">
+<span class="sig-name descname"><span class="pre">retrieve_license</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">license_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.retrieve_license" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a specific license entry from the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>license_id</strong> (<em>str</em>) – The ID of the license to retrieve.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the license entry information.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.retrieve_record">
+<span class="sig-name descname"><span class="pre">retrieve_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.retrieve_record" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a specific record from the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record_id</strong> (<em>Union</em><em>[</em><em>int</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the record to retrieve, or a dictionary containing
+the record information.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the record information.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.sort_deposition_files">
+<span class="sig-name descname"><span class="pre">sort_deposition_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deposition_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_id_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.sort_deposition_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sorts the files of a specific deposition on the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deposition_id</strong> (<em>Union</em><em>[</em><em>int</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the deposition to sort the files for, or a
+dictionary containing the deposition information.</p></li>
+<li><p><strong>file_id_list</strong> (<em>list</em>) – The list of file IDs in the desired order.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the sorted deposition files.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the file_id_list parameter is not a list.</p></li>
+<li><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.update_deposition">
+<span class="sig-name descname"><span class="pre">update_deposition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deposition_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.update_deposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates a specific deposition on the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deposition_id</strong> (<em>Union</em><em>[</em><em>int</em><em>,</em><em>Dict</em><em>]</em>) – The ID of the deposition to update, or a dictionary
+containing the deposition information.</p></li>
+<li><p><strong>metadata</strong> (<em>Dict</em><em>[</em><em>str</em><em>,</em><em>Any</em><em>]</em>) – The updated metadata for the deposition.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response JSON containing the updated deposition.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the metadata parameter is not a dictionary.</p></li>
+<li><p><a class="reference internal" href="#zen.api.APIResponseError" title="zen.api.APIResponseError"><strong>APIResponseError</strong></a> – If the response status code indicates an error during the API request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.APIZenodo.url_token">
+<span class="sig-name descname"><span class="pre">url_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#zen.api.APIZenodo.url_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a provided base url with the Zenodo API token as a query string parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> (<em>str</em>) – The URL to send the GET request to.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for the GET request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The URL with ‘access_token=&lt;token&gt;’ parameter in the query string.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="zen.api.Depositions">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zen.api.</span></span><span class="sig-name descname"><span class="pre">Depositions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#zen.api.Zenodo" title="zen.api.Zenodo"><span class="pre">zen.api.Zenodo</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zen.api.Depositions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -246,6 +811,95 @@ retrieve, or a dictionary containing the deposition information.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="zen.api.License">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zen.api.</span></span><span class="sig-name descname"><span class="pre">License</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zen.api.License" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="zen.api.Licenses">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zen.api.</span></span><span class="sig-name descname"><span class="pre">Licenses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#zen.api.Zenodo" title="zen.api.Zenodo"><span class="pre">zen.api.Zenodo</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zen.api.Licenses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Interacting with licenses on the Zenodo API.</p>
+<p>The Vocabularies class implements <cite>vocabularies</cite> endpoint of the Zenodo API. This class is
+used by the <cite>Zenodo</cite> class to perform vocabularies queries on Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>api</strong> (<a class="reference internal" href="#zen.api.Zenodo" title="zen.api.Zenodo"><em>Zenodo</em></a>) – The Zenodo instance used to interact with Zenodo API.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<ol class="arabic simple">
+<li><p>Accessing the instance of the Licenses class:</p></li>
+</ol>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">zen</span> <span class="kn">import</span> <span class="n">Zenodo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zen</span> <span class="o">=</span> <span class="n">Zenodo</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">Zenodo</span><span class="o">.</span><span class="n">sandbox_url</span><span class="p">,</span> <span class="n">api_token</span><span class="o">=</span><span class="s1">&#39;your_api_token&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zen</span><span class="o">.</span><span class="n">vocabularies</span>  <span class="c1"># Instance of class Vocabularies</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Retrieving a list of licenses that match a specific query:</p></li>
+</ol>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zen</span><span class="o">.</span><span class="n">vocabularies</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;licenses&#39;</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="s1">&#39;cc&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Retrieving a Zenodo license:</p></li>
+</ol>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zen</span><span class="o">.</span><span class="n">vocabularies</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;license&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;cc-zero&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.Licenses.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#zen.api.LicensesPage" title="zen.api.LicensesPage"><span class="pre">zen.api.LicensesPage</span></a></span></span><a class="headerlink" href="#zen.api.Licenses.list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a list of licenses from Zenodo.</p>
+<p>This method searches licenses registered in Zenodo. It provides a streamlined way to
+query and filter licenses based on specific criteria, including search terms, and the
+maximum number of licenses per page, and the page number to retrieve.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>=None</em>) – The Elasticsearch query to filter the licenses.</p></li>
+<li><p><strong>page</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em><em>=None</em>) – The page number of pagination.</p></li>
+<li><p><strong>size</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em><em>=None</em>) – The maximum number of licenses to retrieve per page.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The first page of the licenses list.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#zen.api.LicensesPage" title="zen.api.LicensesPage">LicensesPage</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.api.Licenses.retrieve">
+<span class="sig-name descname"><span class="pre">retrieve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#zen.api.License" title="zen.api.License"><span class="pre">zen.api.License</span></a></span></span><a class="headerlink" href="#zen.api.Licenses.retrieve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a specific license from the Zenodo API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>license</strong> (<em>Union</em><em>[</em><a class="reference internal" href="dataset.html#zen.dataset.Deposition" title="zen.dataset.Deposition"><em>Deposition</em></a><em>,</em><em>Dict</em><em>[</em><em>str</em><em>,</em><em>Any</em><em>]</em><em>,</em><em>int</em><em>]</em>) – The ID of the license to
+retrieve, or a dictionary containing the license information.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A License object representing the retrieved license.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#zen.api.License" title="zen.api.License">License</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="zen.api.LicensesPage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zen.api.</span></span><span class="sig-name descname"><span class="pre">LicensesPage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#zen.api.Zenodo" title="zen.api.Zenodo"><span class="pre">zen.api.Zenodo</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zen.api.LicensesPage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">zen.api._PagedData</span></code></p>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="zen.api.Zenodo">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zen.api.</span></span><span class="sig-name descname"><span class="pre">Zenodo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'https://zenodo.org'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zen.api.Zenodo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -288,7 +942,7 @@ Zenodo API.</p></li>
 </div>
 <dl class="py property">
 <dt class="sig sig-object py" id="zen.api.Zenodo.api">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">api</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">zen.api._APIZenodo</span></em><a class="headerlink" href="#zen.api.Zenodo.api" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">api</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#zen.api.APIZenodo" title="zen.api.APIZenodo"><span class="pre">zen.api.APIZenodo</span></a></em><a class="headerlink" href="#zen.api.Zenodo.api" title="Permalink to this definition">¶</a></dt>
 <dd><p>The internal API object.</p>
 </dd></dl>
 
