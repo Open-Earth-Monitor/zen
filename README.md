@@ -49,7 +49,7 @@ zen = Zenodo(url=Zenodo.sandbox_url, token="your_api_token")
 dep = zen.depositions.create()
 
 # Uploading a file
-dep.files.upload('examples/file1.csv')
+dep.files.create('examples/file1.csv')
 
 # Print the deposition ID
 print(f"Deposition ID: {dep.id}")
