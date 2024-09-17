@@ -617,7 +617,7 @@ class _FileDataset(_BaseDataset):
     
     def __contains__(self, item: BaseFile):
         return item.filename in self._index and (self._index[item.filename].checksum is None or \
-            (item.checksum is not None and item.checksum == self._index[item.filename].checksum))
+            item.checksum is None or item.checksum == self._index[item.filename].checksum)
     
     def _new_file(self, file: Union[Dict[str,Any],str]) -> BaseFile:
         return BaseFile(file)
