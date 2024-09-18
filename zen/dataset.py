@@ -822,14 +822,14 @@ class LocalFiles(_FileDataset):
         for file in self:
             file.update_metadata()
     
-    def get_deposition(self, url: str='https://zenodo.org', token: Optional[str]=None,
+    def set_deposition(self, url: str='https://zenodo.org', token: Optional[str]=None,
                        headers: Optional[Dict[str,str]]=None,
                        metadata: Optional[Union[Metadata,Dict[str,Any]]]=None,
                        deposition: Optional[Union[Deposition,Dict[str,Any],int]]=None,
                        create_if_not_exists: bool=True) -> Deposition:
-        """Get the dataset deposition.
+        """Set the dataset deposition.
         
-        Get the deposition of the dataset. If the dataset has no linked deposition, the `deposition` 
+        Set the deposition of the dataset. If the dataset has no linked deposition, the `deposition` 
         parameter is `None` and the `create_if_not_exists` parameter is `True`, it creates a 
         new deposition. The linked deposition is saved into dataset file.
         
@@ -874,8 +874,6 @@ class LocalFiles(_FileDataset):
                 deposition = api.depositions.create(metadata)
             else:
                 deposition = api.depositions.retrieve(dataset.deposition)
-            dataset.deposition = deposition.data
-            dataset.save(self._file)
         else:
             if not isinstance(deposition, Deposition):
                 api = Zenodo(url, token, headers)
@@ -886,6 +884,8 @@ class LocalFiles(_FileDataset):
                     raise ValueError('Invalid deposition assignment. The current deposition ' +
                                     f'({saved_deposition.id}) differs from the provided one ' +
                                     f'({deposition.id}). Please, consider creating a new dataset.')
+        dataset.deposition = deposition.data
+        dataset.save(self._file)
         return deposition
     
     def save(self, file: Optional[str]=None) -> LocalFiles:
