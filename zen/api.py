@@ -152,7 +152,7 @@ class _FileUpload:
         self.progress = None
         if progress:
             self.progress = tqdm(total=self.file_size, unit='B', unit_scale=True, 
-                                 unit_divisor=1024*1024)
+                                 unit_divisor=1024)
     
     def __iter__(self):
         while True:
