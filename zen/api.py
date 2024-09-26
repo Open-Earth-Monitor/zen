@@ -151,8 +151,8 @@ class _FileUpload:
         self.file = open(filename, 'rb')
         self.progress = None
         if progress:
-            self.progress = tqdm(total=self.file_size, unit='MiB', unit_scale=True,
-                                 unit_divisor=1024*1024, desc=filename)
+            self.progress = tqdm(total=self.file_size, unit='MiB', unit_scale=True, 
+                                 unit_divisor=1024*1024)
     
     def __iter__(self):
         while True:
@@ -166,6 +166,13 @@ class _FileUpload:
     
     def __len__(self):
         return self.file_size
+    
+    def __enter__(self):
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.progress.close()
+        self.file.close()
     
     def close(self):
         """
