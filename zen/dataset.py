@@ -26,7 +26,7 @@ Examples:
         # associated with dataset, creates a new one. You can also pass an existing
         # deposition to associate with your local files dataset.
         # Replace `token` by your actual access token.
-        dep = ds.get_deposition(url=Zenodo.sandbox_url, token='your_access_token')
+        dep = ds.set_deposition(url=Zenodo.sandbox_url, token='your_access_token')
         
         # Accessing the deposition associated with your local files
         dep.data  # Dictionary representing Zenodo Deposition raw data
@@ -42,10 +42,10 @@ Examples:
         
         # If some local files has been changed, `upload()` method will detect it. 
         # It uploads just those local files not updated in Zenodo.
-        # Calling `get_deposition()` method again just returns the existing deposition
+        # Calling `set_deposition()` method again just returns the existing deposition
         # already linked to the current dataset.
         # Replace `token` by your actual access token.
-        dep = ds.get_deposition(url=Zenodo.sandbox_url, token='your_access_token')
+        dep = ds.set_deposition(url=Zenodo.sandbox_url, token='your_access_token')
         ds.upload(dep)
         
         # Adding additional files to the dataset
@@ -681,7 +681,7 @@ class LocalFiles(_FileDataset):
     The `deposition` property represents the Zenodo deposition associated with the dataset. It 
     provides access to the Zenodo deposition object for the dataset, which is important for 
     managing the dataset on the Zenodo platform. After creating a new dataset, you can bind it
-    to a specific Zenodo deposition using `get_deposition()` method. 
+    to a specific Zenodo deposition using `set_deposition()` method. 
     
     Args:
         files (Optional[List[Union[Dict[str,Any],str]]]=None): The list of local files or 
@@ -703,7 +703,7 @@ class LocalFiles(_FileDataset):
         
         3. Create or retrieve a deposition
         
-        >>> dep = ds.get_deposition(url=Zenodo.sandbox_url, token='your_api_token')
+        >>> dep = ds.set_deposition(url=Zenodo.sandbox_url, token='your_api_token')
         
         At the first run, this will create the deposition. After that it
         just load saved deposition from local dataset file.
@@ -808,6 +808,7 @@ class LocalFiles(_FileDataset):
         if template is not None:
             for file in self._data:
                 file.properties.update(file.parse_template(template))
+        self._deposition = None
     
     def __getitem__(self, key: int) -> LocalFile:
         return super().__getitem__(key)
@@ -886,6 +887,7 @@ class LocalFiles(_FileDataset):
                                     f'({deposition.id}). Please, consider creating a new dataset.')
         dataset.deposition = deposition.data
         dataset.save(self._file)
+        self._deposition = deposition
         return deposition
     
     def save(self, file: Optional[str]=None) -> LocalFiles:
@@ -1203,14 +1205,15 @@ class LocalFiles(_FileDataset):
                 ('' if suffix is None else suffix)
         return self
     
-    def upload(self, deposition: Deposition, progress: bool=True, force: bool=False) -> None:
+    def upload(self, deposition: Optional[Deposition]=None, progress: bool=True, 
+               force: bool=False) -> None:
         """Upload files to a Zenodo deposition and update files' metadata.
         
         This method enables you to upload files to a Zenodo deposition, ensuring that their metadata 
         is up-to-date.
         
         Args:
-            deposition (Deposition): Deposition to upload files.
+            deposition (Optional[Deposition]=None): Alternative deposition to upload files.
             progress (bool=True): Show a progress bar?
             force (bool=False): Should all files be uploaded regardless they already been 
                 uploaded or not?
@@ -1224,7 +1227,7 @@ class LocalFiles(_FileDataset):
             
             >>> from zen import LocalFiles, Zenodo
             >>> ds = LocalFiles.from_file('examples/dataset.json)
-            >>> dep = ds.get_deposition(Zenodo.sandbox_url, token='your_api_token')
+            >>> dep = ds.set_deposition(Zenodo.sandbox_url, token='your_api_token')
             >>> ds.upload(dep)
             
             This example uploads files to the specified Zenodo deposition (`my_deposition`) and 
@@ -1360,6 +1363,10 @@ class LocalFiles(_FileDataset):
         for f in self._data:
             keys.update([k for k in f.properties.keys()])
         return keys
+    
+    @property
+    def deposition(self) -> Deposition:
+        return self._deposition
 
 
 class DepositionFiles(_FileDataset):
