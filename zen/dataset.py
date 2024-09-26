@@ -35,7 +35,7 @@ Examples:
         dep.metadata  # Metadata class to interact with deposition metadata
         
         # Upload the local files not already uploaded to Zenodo
-        ds.upload(dep)
+        ds.upload()
         
         # To open the dataset in a later Python session, use `from_file()` method
         ds = LocalFiles.from_file('examples/dataset.json')
@@ -46,7 +46,7 @@ Examples:
         # already linked to the current dataset.
         # Replace `token` by your actual access token.
         dep = ds.set_deposition(url=Zenodo.sandbox_url, token='your_access_token')
-        ds.upload(dep)
+        ds.upload()
         
         # Adding additional files to the dataset
         new_local_file_paths = ['examples/file3.csv']
@@ -74,7 +74,7 @@ Examples:
         [f for f in dep if f not in ds]
         
         # Upload only new/modified files to Zenodo deposition
-        ds.upload(dep)
+        ds.upload()
         
         # Delete a file from Zenodo deposition
         # This does not affect the local files dataset
@@ -710,13 +710,13 @@ class LocalFiles(_FileDataset):
         
         4. Upload files to Zenodo deposition
         
-        >>> ds.upload(dep)  # upload files
+        >>> ds.upload()  # upload files
         
         5. Add and upload additional files
         
         >>> ds.add(['examples/file3.csv'])
-        >>> ds.upload(dep)  # upload just new/modified files
-        >>> ds.upload(dep, force=True)  # upload everything again
+        >>> ds.upload()  # upload just new/modified files
+        >>> ds.upload(force=True)  # upload everything again
         
         Discard the deposition example.
         
@@ -1205,15 +1205,13 @@ class LocalFiles(_FileDataset):
                 ('' if suffix is None else suffix)
         return self
     
-    def upload(self, deposition: Optional[Deposition]=None, progress: bool=True, 
-               force: bool=False) -> None:
+    def upload(self, progress: bool=True, force: bool=False) -> None:
         """Upload files to a Zenodo deposition and update files' metadata.
         
         This method enables you to upload files to a Zenodo deposition, ensuring that their metadata 
         is up-to-date.
         
         Args:
-            deposition (Optional[Deposition]=None): Alternative deposition to upload files.
             progress (bool=True): Show a progress bar?
             force (bool=False): Should all files be uploaded regardless they already been 
                 uploaded or not?
@@ -1227,8 +1225,8 @@ class LocalFiles(_FileDataset):
             
             >>> from zen import LocalFiles, Zenodo
             >>> ds = LocalFiles.from_file('examples/dataset.json)
-            >>> dep = ds.set_deposition(Zenodo.sandbox_url, token='your_api_token')
-            >>> ds.upload(dep)
+            >>> ds.set_deposition(Zenodo.sandbox_url, token='your_api_token')
+            >>> ds.upload()
             
             This example uploads files to the specified Zenodo deposition (`my_deposition`) and 
             shows a progress bar during the upload. It won't re-upload files that already exist 
@@ -1236,7 +1234,7 @@ class LocalFiles(_FileDataset):
             
             2. Forcefully re-upload all files to a Zenodo deposition:
             
-            >>> ds.upload(dep, force=True)
+            >>> ds.upload(force=True)
             
             In this case, the `force` parameter is set to `True`, which ensures that all files are 
             re-uploaded, even if they exist in the deposition. A progress bar is displayed during 
@@ -1247,16 +1245,21 @@ class LocalFiles(_FileDataset):
             raise ValueError('Cannot upload files on datasets with non-evaluated placeholders. ' + 
                              'Please, use `expand()` function to expand all placeholders.')
         
-        if not isinstance(deposition, Deposition):
+        if self._deposition is None:
+            raise ValueError('Deposition not defined for this dataset. Please, use ' +
+                             '`set_deposition()` method or provide a `deposition` ' +
+                             'parameter to define a deposition for this dataset.')
+            
+        if not isinstance(self._deposition, Deposition):
             raise TypeError('Invalid `deposition` value. Expecting a `Deposition` but got a ' +
-                            f'{type(deposition)} instead.')
+                            f'{type(self._deposition)} instead.')
         def _upload(file: LocalFile) -> None:
-            file.upload(deposition, force)
+            file.upload(self._deposition, force)
         try:
             self._for_each(_upload, progress)
         finally:
             self.save()
-        deposition.refresh()
+        self._deposition.refresh()
     
     def summary(self, properties: Optional[List[str]]=None, **kwargs):
         """Summarizes the file properties of the current dataset

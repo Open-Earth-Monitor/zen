@@ -68,7 +68,7 @@ it with Zenodo’s services.</p>
 <span class="n">dep</span><span class="o">.</span><span class="n">metadata</span>  <span class="c1"># Metadata class to interact with deposition metadata</span>
 
 <span class="c1"># Upload the local files not already uploaded to Zenodo</span>
-<span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">dep</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
 
 <span class="c1"># To open the dataset in a later Python session, use `from_file()` method</span>
 <span class="n">ds</span> <span class="o">=</span> <span class="n">LocalFiles</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;examples/dataset.json&#39;</span><span class="p">)</span>
@@ -79,7 +79,7 @@ it with Zenodo’s services.</p>
 <span class="c1"># already linked to the current dataset.</span>
 <span class="c1"># Replace `token` by your actual access token.</span>
 <span class="n">dep</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">set_deposition</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">Zenodo</span><span class="o">.</span><span class="n">sandbox_url</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s1">&#39;your_access_token&#39;</span><span class="p">)</span>
-<span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">dep</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
 
 <span class="c1"># Adding additional files to the dataset</span>
 <span class="n">new_local_file_paths</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;examples/file3.csv&#39;</span><span class="p">]</span>
@@ -107,7 +107,7 @@ it with Zenodo’s services.</p>
 <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">dep</span> <span class="k">if</span> <span class="n">f</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">]</span>
 
 <span class="c1"># Upload only new/modified files to Zenodo deposition</span>
-<span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">dep</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
 
 <span class="c1"># Delete a file from Zenodo deposition</span>
 <span class="c1"># This does not affect the local files dataset</span>
@@ -711,15 +711,15 @@ just load saved deposition from local dataset file.</p>
 <ol class="arabic simple" start="4">
 <li><p>Upload files to Zenodo deposition</p></li>
 </ol>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">dep</span><span class="p">)</span>  <span class="c1"># upload files</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>  <span class="c1"># upload files</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="5">
 <li><p>Add and upload additional files</p></li>
 </ol>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">add</span><span class="p">([</span><span class="s1">&#39;examples/file3.csv&#39;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">dep</span><span class="p">)</span>  <span class="c1"># upload just new/modified files</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">dep</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># upload everything again</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>  <span class="c1"># upload just new/modified files</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># upload everything again</span>
 </pre></div>
 </div>
 <p>Discard the deposition example.</p>
@@ -1192,14 +1192,13 @@ function becomes part of the name of the summarized property value.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="zen.dataset.LocalFiles.upload">
-<span class="sig-name descname"><span class="pre">upload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deposition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#zen.dataset.Deposition" title="zen.dataset.Deposition"><span class="pre">Deposition</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#zen.dataset.LocalFiles.upload" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">upload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#zen.dataset.LocalFiles.upload" title="Permalink to this definition">¶</a></dt>
 <dd><p>Upload files to a Zenodo deposition and update files’ metadata.</p>
 <p>This method enables you to upload files to a Zenodo deposition, ensuring that their metadata
 is up-to-date.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>deposition</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="#zen.dataset.Deposition" title="zen.dataset.Deposition"><em>Deposition</em></a><em>]</em><em>=None</em>) – Alternative deposition to upload files.</p></li>
 <li><p><strong>progress</strong> (<em>bool=True</em>) – Show a progress bar?</p></li>
 <li><p><strong>force</strong> (<em>bool=False</em>) – Should all files be uploaded regardless they already been
 uploaded or not?</p></li>
@@ -1215,8 +1214,8 @@ uploaded or not?</p></li>
 </ol>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">zen</span> <span class="kn">import</span> <span class="n">LocalFiles</span><span class="p">,</span> <span class="n">Zenodo</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span> <span class="o">=</span> <span class="n">LocalFiles</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;examples/dataset.json)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dep</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">set_deposition</span><span class="p">(</span><span class="n">Zenodo</span><span class="o">.</span><span class="n">sandbox_url</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s1">&#39;your_api_token&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">dep</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">set_deposition</span><span class="p">(</span><span class="n">Zenodo</span><span class="o">.</span><span class="n">sandbox_url</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s1">&#39;your_api_token&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>This example uploads files to the specified Zenodo deposition (<cite>my_deposition</cite>) and
@@ -1225,7 +1224,7 @@ in the deposition.</p>
 <ol class="arabic simple" start="2">
 <li><p>Forcefully re-upload all files to a Zenodo deposition:</p></li>
 </ol>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">dep</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In this case, the <cite>force</cite> parameter is set to <cite>True</cite>, which ensures that all files are
