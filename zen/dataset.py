@@ -126,7 +126,7 @@ import json
 import os
 import re
 import requests
-import tqdm
+from tqdm import tqdm
 import time
 import random
 
@@ -311,8 +311,8 @@ class LocalFile(BaseFile):
                 del self['checksum']
             self.filedate = filedate
     
-    def upload(self, deposition: Deposition, force: bool=False, max_retries: int=15, 
-               min_delay: int=10, max_delay: int=60) -> Self:
+    def upload(self, deposition: Deposition, progress: bool=True, force: bool=False, 
+               max_retries: int=15, min_delay: int=10, max_delay: int=60) -> Self:
         """Uploads the local file to a Zenodo deposition.
         
         Uploads the local file to a Zenodo deposition, updating its metadata in the process. If the 
@@ -323,7 +323,14 @@ class LocalFile(BaseFile):
         
         Args:
             deposition (Deposition): The deposition to where upload the file.
+            progress (bool=True): Whether to display a progress bar. Defaults to True.
             force (bool=False): Should the file be uploaded regardless it already been uploaded?
+            max_retries (int, optional): Maximum number of retry attempts if the upload fails. 
+              Defaults to 15.
+            min_delay (int, optional): Minimum delay in seconds between retry attempts. 
+              Defaults to 10 seconds.
+            max_delay (int, optional): Maximum delay in seconds between retry attempts. 
+              Defaults to 60 seconds.
 
         Returns:
             LocalFile: The uploaded file with its updated metadata.
@@ -352,7 +359,7 @@ class LocalFile(BaseFile):
                 retries = 0
                 while True:
                     try:
-                        deposition.files.create(url)
+                        deposition.files.create(url, progress=progress)
                         break
                     except Exception as e:
                         print(f"Attempt {retries + 1} failed:", e)
@@ -623,7 +630,7 @@ class _FileDataset(_BaseDataset):
         return BaseFile(file)
     
     def _for_each(self, fn_foreach: Callable[[BaseFile],None], progress: bool=True) -> None:
-        for file in tqdm.tqdm(self._data, disable=not progress or len(self._data) <= 1):
+        for file in tqdm(self._data, disable=not progress or len(self._data) <= 1):
             fn_foreach(file)
     
     def _filter(self, fn_filter: Optional[Callable[[BaseFile],bool]]=None) -> List[BaseFile]:
@@ -1205,16 +1212,23 @@ class LocalFiles(_FileDataset):
                 ('' if suffix is None else suffix)
         return self
     
-    def upload(self, progress: bool=True, force: bool=False) -> None:
+    def upload(self, progress: bool=True, force: bool=False, 
+               max_retries: int=15, min_delay: int=10, max_delay: int=60) -> None:
         """Upload files to a Zenodo deposition and update files' metadata.
         
         This method enables you to upload files to a Zenodo deposition, ensuring that their metadata 
         is up-to-date.
         
         Args:
-            progress (bool=True): Show a progress bar?
+            progress (bool=True): Whether to display a progress bar. Defaults to True.
             force (bool=False): Should all files be uploaded regardless they already been 
                 uploaded or not?
+            max_retries (int, optional): Maximum number of retry attempts if the upload fails. 
+              Defaults to 15.
+            min_delay (int, optional): Minimum delay in seconds between retry attempts. 
+              Defaults to 10 seconds.
+            max_delay (int, optional): Maximum delay in seconds between retry attempts. 
+              Defaults to 60 seconds.
         
         Returns:
             None
@@ -1254,9 +1268,10 @@ class LocalFiles(_FileDataset):
             raise TypeError('Invalid `deposition` value. Expecting a `Deposition` but got a ' +
                             f'{type(self._deposition)} instead.')
         def _upload(file: LocalFile) -> None:
-            file.upload(self._deposition, force)
+            file.upload(self._deposition, progress=progress, force=force, max_retries=max_retries, 
+                        min_delay=min_delay, max_delay=max_delay)
         try:
-            self._for_each(_upload, progress)
+            self._for_each(_upload, progress=False)
         finally:
             self.save()
         self._deposition.refresh()
@@ -1422,13 +1437,14 @@ class DepositionFiles(_FileDataset):
             .list_deposition_files(self._deposition.id))
         return self
     
-    def create(self, file: str, bucket_filename: Optional[str]=None) -> Self:
+    def create(self, file: str, bucket_filename: Optional[str]=None, progress: bool=True) -> Self:
         """Uploads a file to the deposition on the Zenodo API. 
         
         Args: 
             file (str): The local file path of the file to upload. 
             bucket_filename (Optional[str]=None): The desired filename for the file in the 
                 deposition's bucket. 
+            progress (bool=True): Whether to display a progress bar. Defaults to True.
         
         Returns: 
             DepositionFiles: The current object.
@@ -1447,7 +1463,7 @@ class DepositionFiles(_FileDataset):
                 file = __utils__.download_file(file, tempfile)
             try:
                 self._deposition.api.api.create_deposition_file(self._deposition.id, file, 
-                                                                bucket_filename)
+                                                                bucket_filename, progress)
             except json.JSONDecodeError as e:
                 pass
         finally:

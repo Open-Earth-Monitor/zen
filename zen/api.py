@@ -33,6 +33,7 @@ import zen.dataset as __dataset__
 import zen.metadata as __metadata__
 import os
 import requests
+from tqdm import tqdm
 
 
 class APIResponseError(Exception):
@@ -135,6 +136,44 @@ class APIResponseError(Exception):
         except:
             return APIResponseError.bad_status_codes[self.status_code]['description']
 
+class _FileUpload:
+    """
+    Internal class to manage file uploads with progress tracking.
+
+    This class reads a file in chunks and optionally displays a progress bar
+    during the upload process. The progress bar shows the file size in MiB and
+    updates as the file is being uploaded.
+    """
+    def __init__(self, filename, chunk_size=1024, progress=True):
+        self.filename = filename
+        self.file_size = os.path.getsize(filename)
+        self.chunk_size = chunk_size
+        self.file = open(filename, 'rb')
+        self.progress = None
+        if progress:
+            self.progress = tqdm(total=self.file_size, unit='MiB', unit_scale=True,
+                                 unit_divisor=1024*1024, desc=filename)
+    
+    def __iter__(self):
+        while True:
+            data = self.file.read(self.chunk_size)
+            if not data:
+                self.progress.close()
+                break
+            if self.progress is not None:
+                self.progress.update(len(data))
+            yield data
+    
+    def __len__(self):
+        return self.file_size
+    
+    def close(self):
+        """
+        Closes the file and stops the progress bar if it is active.
+
+        This method should be called after the file has been completely read and uploaded.
+        """
+        self.file.close()
 
 class _APIRequest:
     """Internal class for handling API 
@@ -669,7 +708,7 @@ class APIZenodo:
         return response.json()
     
     def create_deposition_file(self, deposition_id: Union[int,Dict], filename: str, \
-        bucket_filename: Optional[str]=None, **kwargs) -> Dict:
+        bucket_filename: Optional[str]=None, progress: bool=True, **kwargs) -> Dict:
         """Creates a new file for a specific deposition on the Zenodo API. 
     
         Args: 
@@ -677,6 +716,7 @@ class APIZenodo:
                 dictionary containing the deposition information. 
             filename (str): The local file path of the file to upload. 
             bucket_filename (str or None): The desired filename for the file in the deposition's bucket. 
+            progress (bool): Show a progress bar to track the upload?
             **kwargs: Additional keyword arguments for the API request. 
     
         Returns: 
@@ -693,7 +733,7 @@ class APIZenodo:
         if bucket_filename is None:
             bucket_filename = os.path.basename(filename)
         url = f"{bucket_url}/{bucket_filename}"
-        with open(filename, 'rb') as file_data:
+        with _FileUpload(filename, chunk_size=1024, progress=progress) as file_data:
             response = self._req.put(url, data=file_data, **kwargs)
         return response.json()
     
