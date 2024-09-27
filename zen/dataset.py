@@ -119,7 +119,7 @@ if TYPE_CHECKING:
     from .metadata import Metadata
 from copy import copy, deepcopy
 from datetime import datetime
-import zen.api as __api__
+from zen.api import Zenodo
 import zen.metadata as __metadata__
 import zen.utils as __utils__
 import json
@@ -129,8 +129,6 @@ import requests
 from tqdm import tqdm
 import time
 import random
-
-Zenodo = __api__.Zenodo
 
 class BaseFile(dict):
     """Base Class for Representing Files with Associated Metadata.
@@ -343,7 +341,8 @@ class LocalFile(BaseFile):
             url = self.url
             tempfile = None
             self.update_metadata()
-            print(f'Processing file: {url}')
+            if progress:
+                print(f'Processing: {url}')
             if self.is_remote and self.checksum is None:
                 tempdir = os.path.join(os.getcwd(), '.zen')
                 if not os.path.isdir(tempdir):
@@ -656,18 +655,21 @@ class _DatasetFile:
         if 'zenodo' in data and data['zenodo'] is not None and 'id' not in data['zenodo']:
             raise ValueError("Invalid dataset JSON file. Dataset must have 'zenodo.id' value.")
         dataset = cls(data['localfiles'], data['zenodo'])
-        dataset.files.file = file
+        dataset.file = file
         return dataset
     
-    def __init__(self, files: Union[LocalFiles,List[Dict[str, Any],str],None], 
-                 deposition: Optional[Union[Dict[str,Any],int]]=None) -> None:
-        if files is not None and not isinstance(files, LocalFiles):
-            files = LocalFiles(files)
-        self.files: Union[LocalFiles,None] = files
-        self.deposition: Union[Dict[str,Any],int,None] = deposition
+    def __init__(self, localfiles: Union[LocalFiles,List[Dict[str, Any],str],None], 
+                 zenodo: Optional[Union[Dict[str,Any],int]]=None) -> None:
+        if localfiles is not None and isinstance(localfiles, LocalFiles):
+            localfiles = localfiles.data
+        if zenodo is not None and isinstance(zenodo, Deposition):
+            zenodo = zenodo.data
+        self.localfiles = localfiles
+        self.zenodo = zenodo
+        self.file = None
     
     def save(self, file: str) -> None:
-        data = dict(zenodo=self.deposition, localfiles=self.files.data)
+        data = dict(zenodo=self.zenodo, localfiles=self.localfiles)
         __utils__.save_json(data, file)
 
 
@@ -796,10 +798,12 @@ class LocalFiles(_FileDataset):
         
         """ 
         dataset = _DatasetFile.from_file(file)
-        return dataset.files
+        ds = cls(dataset.localfiles)
+        ds._file = file
+        return ds
     
     def __init__(self, files: Optional[List[Union[Dict[str,Any],str]]]=None, 
-                 template: Optional[str]=None) -> None:
+                 template: Optional[str]=None, dataset_path: Optional[str]=None) -> None:
         if template is not None:
             if not isinstance(template, str):
                 raise TypeError('Invalid `template` parameter. Expecting a `str` but got a ' +
@@ -810,7 +814,7 @@ class LocalFiles(_FileDataset):
         super().__init__(files)
         self._data: List[LocalFile] = self._data
         self._index: Dict[str, LocalFile] = self._index
-        self._file: Optional[str] = None
+        self._file = dataset_path
         self._placeholders = set()
         if template is not None:
             for file in self._data:
@@ -830,11 +834,9 @@ class LocalFiles(_FileDataset):
         for file in self:
             file.update_metadata()
     
-    def set_deposition(self, url: str='https://zenodo.org', token: Optional[str]=None,
-                       headers: Optional[Dict[str,str]]=None,
-                       metadata: Optional[Union[Metadata,Dict[str,Any]]]=None,
+    def set_deposition(self, api: Zenodo, metadata: Optional[Union[Metadata,Dict[str,Any]]]=None,
                        deposition: Optional[Union[Deposition,Dict[str,Any],int]]=None,
-                       create_if_not_exists: bool=True) -> Deposition:
+                       create_if_not_exists: bool=False) -> Deposition:
         """Set the dataset deposition.
         
         Set the deposition of the dataset. If the dataset has no linked deposition, the `deposition` 
@@ -842,21 +844,18 @@ class LocalFiles(_FileDataset):
         new deposition. The linked deposition is saved into dataset file.
         
         Args:
-            url (str): The base URL of the Zenodo API. 
-            token (Optional[str]=None): The access token for making authenticated requests to 
-                the Zenodo API. 
-            headers (Optional[Dict[str,str]]=None): Additional headers to include in API requests. 
+            api (Zenodo): Zenodo object to access Zenodo's API. 
             metadata (Optional[Union[MetaGeneric,Dict[str,Any]]]=None): The metadata for the new 
                 deposition. Ignored if `deposition` is informed or the dataset already has a 
                 deposition.
             deposition (Optional[Union[Deposition,Dict[str,Any],int]]=None): An existing deposition 
                 to bind with the current dataset.
-            create_if_not_exists (bool=True): If there is no deposition linked to the current
+            create_if_not_exists (bool=False): If there is no deposition linked to the current
                 dataset, it creates a new deposition on Zenodo. Ignored if `deposition` parameter
                 is informed.
         
         Returns: 
-            Deposition: The deposition associated with the current dataset.
+            LocalFiles: The current dataset with the updated deposition.
         
         Raises:
             ValueError: If the dataset already has an deposition and a different deposition has 
@@ -866,36 +865,33 @@ class LocalFiles(_FileDataset):
         
         """ 
         if self._file is None:
-            raise ValueError('Invalid operation. Please, use `save()` method to save the ' + 
-                             'dataset before assigning a deposition.')
-        dataset = _DatasetFile.from_file(self._file)
+            raise ValueError('Invalid operation. Please, inform the dataset path (e.g. `save()`) ' + 
+                             'before assigning a deposition.')
+        if not os.path.isfile(self._file):
+            dataset = _DatasetFile(self, self._deposition)
+        else:
+            dataset = _DatasetFile.from_file(self._file)
         if deposition is None:
-            api = Zenodo(url, token, headers)
-            if dataset.deposition is None:
+            if dataset.zenodo is None:
                 if not create_if_not_exists:
                     raise ValueError('No deposition is linked with current dataset. Please, ' +
                                      'provide a valid deposition to `deposition` parameter, or ' +
                                      'inform `create_if_not_exists=True` to create a new ' +
                                      'deposition.')
-                # check if file is writeable
-                dataset.save(self._file)
                 deposition = api.depositions.create(metadata)
             else:
-                deposition = api.depositions.retrieve(dataset.deposition)
+                deposition = api.depositions.retrieve(dataset.zenodo)
         else:
             if not isinstance(deposition, Deposition):
-                api = Zenodo(url, token, headers)
                 deposition = api.depositions.retrieve(deposition)
-            if dataset.deposition is not None:
-                saved_deposition = api.depositions.retrieve(dataset.deposition)
-                if saved_deposition.id != deposition.id:
-                    raise ValueError('Invalid deposition assignment. The current deposition ' +
-                                    f'({saved_deposition.id}) differs from the provided one ' +
+            if dataset.zenodo is not None:
+                saved_deposition_id = dataset.zenodo['id']
+                if saved_deposition_id != deposition.id:
+                    raise ValueError('Invalid deposition assignment. The saved deposition ' +
+                                    f'({saved_deposition_id}) differs from the provided one ' +
                                     f'({deposition.id}). Please, consider creating a new dataset.')
-        dataset.deposition = deposition.data
-        dataset.save(self._file)
         self._deposition = deposition
-        return deposition
+        return self
     
     def save(self, file: Optional[str]=None) -> LocalFiles:
         """Saves the dataset metadata.
@@ -926,17 +922,22 @@ class LocalFiles(_FileDataset):
             raise TypeError('Invalid `file` parameter. Expecting a `str` but got a ' +
                             f'`{type(file)}` instead.')
         self._file = file
+        deposition = self._deposition
         if os.path.isfile(self._file):
             dataset = _DatasetFile.from_file(self._file)
+            if dataset.zenodo is not None:
+                saved_deposition_id = dataset.zenodo['id']
+            if deposition is None or deposition.id != saved_deposition_id:
+                raise ValueError('Cannot overwrite file destination. Try to set the dataset ' +
+                                 'deposition or read the dataset from file before saving it.')
             # merge files and save
-            dataset.files.merge(self, remove_unmatched=True)
-            self.merge(dataset.files, remove_unmatched=True)
-            deposition = dataset.deposition
+            files = LocalFiles(dataset.localfiles)
+            files.merge(self, remove_unmatched=True)
+            self.merge(files, remove_unmatched=False)
         else:
-            deposition = None
+            dataset = _DatasetFile(self, deposition)
         # update file date and size
         self._update_metadata()
-        dataset = _DatasetFile(self, deposition)
         dataset.save(self._file)
         return self
     
