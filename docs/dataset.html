@@ -690,6 +690,7 @@ to a specific Zenodo deposition using <cite>set_deposition()</cite> method.</p>
 file paths.</p></li>
 <li><p><strong>template</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>=None</em>) – The filename template to extract properties from the list
 of file names.</p></li>
+<li><p><strong>dataset_path</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>=None</em>) – The filename of the dataset.</p></li>
 </ul>
 </dd>
 </dl>
@@ -904,12 +905,12 @@ to receive one argument, a file from the object being filtered, and return a boo
 
 <dl class="py method">
 <dt class="sig sig-object py" id="zen.dataset.LocalFiles.from_file">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#zen.dataset.LocalFiles" title="zen.dataset.LocalFiles"><span class="pre">LocalFiles</span></a></span></span><a class="headerlink" href="#zen.dataset.LocalFiles.from_file" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#zen.dataset.LocalFiles" title="zen.dataset.LocalFiles"><span class="pre">LocalFiles</span></a></span></span><a class="headerlink" href="#zen.dataset.LocalFiles.from_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loads the dataset metadata.</p>
 <p>Loads the deposition and the local files metadata on a local file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>file</strong> (<em>str</em>) – The filename to read the dataset.</p>
+<dd class="field-odd"><p><strong>dataset_path</strong> (<em>str</em>) – The filename to read the dataset.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A new object with the dataset loaded from file.</p>
@@ -927,7 +928,7 @@ to receive one argument, a file from the object being filtered, and return a boo
 
 <dl class="py method">
 <dt class="sig sig-object py" id="zen.dataset.LocalFiles.from_template">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#zen.dataset.LocalFiles.from_template" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#zen.dataset.LocalFiles.from_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a New Dataset Based on a File Name Template.</p>
 <p>This method imports files to the current dataset based on a provided file name template. The
 template is expanded into a list of files, and these files are associated with the current
@@ -943,7 +944,10 @@ and ‘file11.csv’. After expansion, each expanded placeholder value is stored
 key entry of each file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>template</strong> (<em>str</em>) – The file name template to be expanded as a list of files.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template</strong> (<em>str</em>) – The file name template to be expanded as a list of files.</p></li>
+<li><p><strong>dataset_path</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>=None</em>) – The filename of the dataset.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The dataset with the template.</p>
@@ -1098,6 +1102,24 @@ later using <cite>LocalFiles.from_file()</cite> class method.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;examples/dataset.json&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zen.dataset.LocalFiles.set_dataset_path">
+<span class="sig-name descname"><span class="pre">set_dataset_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zen.dataset.LocalFiles.set_dataset_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the dataset file path.</p>
+<p>Set the dataset JSON file to persist the dataset’s metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dataset_path</strong> (<em>str</em>) – The filename of the dataset.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The current dataset with the updated dataset file path.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#zen.dataset.LocalFiles" title="zen.dataset.LocalFiles">LocalFiles</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
