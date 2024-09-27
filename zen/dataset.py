@@ -777,7 +777,7 @@ class LocalFiles(_FileDataset):
             6
                 
         """
-        files = cls([template])
+        files = cls([template], dataset_path=dataset_path)
         files._placeholders = __utils__.find_placeholders(template, None)
         return files
         
@@ -954,7 +954,7 @@ class LocalFiles(_FileDataset):
             if dataset.zenodo is not None:
                 saved_deposition_id = dataset.zenodo['id']
             if deposition is None or deposition.id != saved_deposition_id:
-                raise ValueError('The deposition of a dataset file cannot be changed.')
+                raise ValueError('The deposition of a dataset cannot be changed.')
             # merge files and save
             files = LocalFiles(dataset.localfiles)
             files.merge(self, remove_unmatched=True)
