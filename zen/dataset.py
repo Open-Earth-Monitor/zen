@@ -830,9 +830,20 @@ class LocalFiles(_FileDataset):
     def _new_file(self, file: Union[Dict[str,Any],str]) -> LocalFile:
         return LocalFile(file)
     
-    def _update_metadata(self) -> None:
+    def update_metadata(self) -> LocalFile:
+        """Update the metadata for all files in the dataset.
+
+        Iterates over all files in the dataset and updates their metadata. This ensures that
+        each file's metadata (e.g. size and date) is current based on the latest available 
+        information.
+
+        Returns:
+            LocalFile: The current dataset with updated metadata for each file.
+        
+        """
         for file in self:
             file.update_metadata()
+        return self
     
     def set_deposition(self, api: Zenodo, metadata: Optional[Union[Metadata,Dict[str,Any]]]=None,
                        deposition: Optional[Union[Deposition,Dict[str,Any],int]]=None,
@@ -937,7 +948,7 @@ class LocalFiles(_FileDataset):
         else:
             dataset = _DatasetFile(self, deposition)
         # update file date and size
-        self._update_metadata()
+        self.update_metadata()
         dataset.save(self._file)
         return self
     
