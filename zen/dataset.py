@@ -344,6 +344,8 @@ class LocalFile(BaseFile):
             if progress:
                 print(f'Processing: {url}')
             if self.is_remote and self.checksum is None:
+                if progress:
+                    print('Downloading to temporary')
                 tempdir = os.path.join(os.getcwd(), '.zen')
                 if not os.path.isdir(tempdir):
                     os.makedirs(tempdir)
@@ -352,6 +354,8 @@ class LocalFile(BaseFile):
             if self.checksum is None:
                 # checksum is erased whenever self.update_metadata() is called and the local 
                 # file has been changed since last time the metadata was retrieved.
+                if progress:
+                    print('Calculating checksum')
                 self.checksum = __utils__.checksum(url, 'md5')
             if force or self not in deposition.files:
                 # upload only if forced, or filename is not in the deposition, or the checksums differ.
