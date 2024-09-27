@@ -697,6 +697,7 @@ class LocalFiles(_FileDataset):
             file paths.
         template (Optional[str]=None): The filename template to extract properties from the list 
             of file names.
+        dataset_path (Optional[str]=None): The filename of the dataset.
         
     Example:
     
@@ -741,7 +742,7 @@ class LocalFiles(_FileDataset):
         return file
     
     @classmethod
-    def from_template(cls, template: str) -> Self:
+    def from_template(cls, template: str, dataset_path: Optional[str]=None) -> Self:
         """Create a New Dataset Based on a File Name Template.
         
         This method imports files to the current dataset based on a provided file name template. The 
@@ -761,6 +762,7 @@ class LocalFiles(_FileDataset):
         
         Args:
             template (str): The file name template to be expanded as a list of files.
+            dataset_path (Optional[str]=None): The filename of the dataset.
         
         Returns:
             LocalFiles: The dataset with the template.
@@ -781,13 +783,13 @@ class LocalFiles(_FileDataset):
         
     
     @classmethod
-    def from_file(cls, file: str) -> LocalFiles:
+    def from_file(cls, dataset_path: str) -> LocalFiles:
         """Loads the dataset metadata.
         
         Loads the deposition and the local files metadata on a local file.
         
         Args:
-            file (str): The filename to read the dataset.
+            dataset_path (str): The filename to read the dataset.
         
         Returns: 
             LocalFiles: A new object with the dataset loaded from file.
@@ -797,9 +799,8 @@ class LocalFiles(_FileDataset):
             >>> ds.data
         
         """ 
-        dataset = _DatasetFile.from_file(file)
-        ds = cls(dataset.localfiles)
-        ds._file = file
+        dataset = _DatasetFile.from_file(dataset_path)
+        ds = cls(files=dataset.localfiles, dataset_path=dataset_path)
         return ds
     
     def __init__(self, files: Optional[List[Union[Dict[str,Any],str]]]=None, 
@@ -845,6 +846,21 @@ class LocalFiles(_FileDataset):
             file.update_metadata()
         return self
     
+    def set_dataset_path(self, dataset_path: str):
+        """Set the dataset file path.
+        
+        Set the dataset JSON file to persist the dataset's metadata.
+        
+        Args:
+            dataset_path (str): The filename of the dataset.
+        
+        Returns: 
+            LocalFiles: The current dataset with the updated dataset file path.
+        
+        """
+        self._file = dataset_path
+        return self
+    
     def set_deposition(self, api: Zenodo, metadata: Optional[Union[Metadata,Dict[str,Any]]]=None,
                        deposition: Optional[Union[Deposition,Dict[str,Any],int]]=None,
                        create_if_not_exists: bool=False) -> Deposition:
@@ -886,7 +902,6 @@ class LocalFiles(_FileDataset):
             if dataset.zenodo is None:
                 if not create_if_not_exists:
                     raise ValueError('No deposition is linked with current dataset. Please, ' +
-                                     'provide a valid deposition to `deposition` parameter, or ' +
                                      'inform `create_if_not_exists=True` to create a new ' +
                                      'deposition.')
                 deposition = api.depositions.create(metadata)
@@ -939,8 +954,7 @@ class LocalFiles(_FileDataset):
             if dataset.zenodo is not None:
                 saved_deposition_id = dataset.zenodo['id']
             if deposition is None or deposition.id != saved_deposition_id:
-                raise ValueError('Cannot overwrite file destination. Try to set the dataset ' +
-                                 'deposition or read the dataset from file before saving it.')
+                raise ValueError('The deposition of a dataset file cannot be changed.')
             # merge files and save
             files = LocalFiles(dataset.localfiles)
             files.merge(self, remove_unmatched=True)
