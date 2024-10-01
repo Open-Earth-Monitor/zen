@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>zen &#8212; zen  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="api module" href="api.html" />
@@ -34,13 +33,345 @@
           <div class="body" role="main">
             
   <section id="zen">
-<h1>zen<a class="headerlink" href="#zen" title="Permalink to this headline">¶</a></h1>
+<h1>zen<a class="headerlink" href="#zen" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api.html">api module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dataset.html">dataset module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metadata.html">metadata module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">api module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#zen.api.APIResponseError"><code class="docutils literal notranslate"><span class="pre">APIResponseError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIResponseError.bad_status_codes"><code class="docutils literal notranslate"><span class="pre">APIResponseError.bad_status_codes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIResponseError.get_respose_description"><code class="docutils literal notranslate"><span class="pre">APIResponseError.get_respose_description()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#zen.api.APIZenodo"><code class="docutils literal notranslate"><span class="pre">APIZenodo</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.checksum_deposition_file"><code class="docutils literal notranslate"><span class="pre">APIZenodo.checksum_deposition_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.create_deposition"><code class="docutils literal notranslate"><span class="pre">APIZenodo.create_deposition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.create_deposition_file"><code class="docutils literal notranslate"><span class="pre">APIZenodo.create_deposition_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.delete_deposition"><code class="docutils literal notranslate"><span class="pre">APIZenodo.delete_deposition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.delete_deposition_file"><code class="docutils literal notranslate"><span class="pre">APIZenodo.delete_deposition_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.discard_deposition"><code class="docutils literal notranslate"><span class="pre">APIZenodo.discard_deposition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.edit_deposition"><code class="docutils literal notranslate"><span class="pre">APIZenodo.edit_deposition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.get_deposition_bucket"><code class="docutils literal notranslate"><span class="pre">APIZenodo.get_deposition_bucket()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.iter_pagination"><code class="docutils literal notranslate"><span class="pre">APIZenodo.iter_pagination()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.list_deposition_files"><code class="docutils literal notranslate"><span class="pre">APIZenodo.list_deposition_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.list_depositions"><code class="docutils literal notranslate"><span class="pre">APIZenodo.list_depositions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.list_licenses"><code class="docutils literal notranslate"><span class="pre">APIZenodo.list_licenses()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.list_records"><code class="docutils literal notranslate"><span class="pre">APIZenodo.list_records()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.new_version_deposition"><code class="docutils literal notranslate"><span class="pre">APIZenodo.new_version_deposition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.publish_deposition"><code class="docutils literal notranslate"><span class="pre">APIZenodo.publish_deposition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.request"><code class="docutils literal notranslate"><span class="pre">APIZenodo.request</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.retrieve_deposition"><code class="docutils literal notranslate"><span class="pre">APIZenodo.retrieve_deposition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.retrieve_deposition_file"><code class="docutils literal notranslate"><span class="pre">APIZenodo.retrieve_deposition_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.retrieve_license"><code class="docutils literal notranslate"><span class="pre">APIZenodo.retrieve_license()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.retrieve_record"><code class="docutils literal notranslate"><span class="pre">APIZenodo.retrieve_record()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.sort_deposition_files"><code class="docutils literal notranslate"><span class="pre">APIZenodo.sort_deposition_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.update_deposition"><code class="docutils literal notranslate"><span class="pre">APIZenodo.update_deposition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.APIZenodo.url_token"><code class="docutils literal notranslate"><span class="pre">APIZenodo.url_token()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#zen.api.Depositions"><code class="docutils literal notranslate"><span class="pre">Depositions</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Depositions.create"><code class="docutils literal notranslate"><span class="pre">Depositions.create()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Depositions.list"><code class="docutils literal notranslate"><span class="pre">Depositions.list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Depositions.retrieve"><code class="docutils literal notranslate"><span class="pre">Depositions.retrieve()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Depositions.sort_options"><code class="docutils literal notranslate"><span class="pre">Depositions.sort_options</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Depositions.status_options"><code class="docutils literal notranslate"><span class="pre">Depositions.status_options</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#zen.api.License"><code class="docutils literal notranslate"><span class="pre">License</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#zen.api.Licenses"><code class="docutils literal notranslate"><span class="pre">Licenses</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Licenses.list"><code class="docutils literal notranslate"><span class="pre">Licenses.list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Licenses.retrieve"><code class="docutils literal notranslate"><span class="pre">Licenses.retrieve()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#zen.api.LicensesPage"><code class="docutils literal notranslate"><span class="pre">LicensesPage</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#zen.api.Zenodo"><code class="docutils literal notranslate"><span class="pre">Zenodo</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Zenodo.api"><code class="docutils literal notranslate"><span class="pre">Zenodo.api</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Zenodo.depositions"><code class="docutils literal notranslate"><span class="pre">Zenodo.depositions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Zenodo.licenses"><code class="docutils literal notranslate"><span class="pre">Zenodo.licenses</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Zenodo.max_deposition_files"><code class="docutils literal notranslate"><span class="pre">Zenodo.max_deposition_files</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Zenodo.max_storage_size"><code class="docutils literal notranslate"><span class="pre">Zenodo.max_storage_size</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Zenodo.records"><code class="docutils literal notranslate"><span class="pre">Zenodo.records</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Zenodo.sandbox_url"><code class="docutils literal notranslate"><span class="pre">Zenodo.sandbox_url</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#zen.api.Zenodo.url"><code class="docutils literal notranslate"><span class="pre">Zenodo.url</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">dataset module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dataset.html#zen.dataset.BaseFile"><code class="docutils literal notranslate"><span class="pre">BaseFile</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.BaseFile.checksum"><code class="docutils literal notranslate"><span class="pre">BaseFile.checksum</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.BaseFile.filedate"><code class="docutils literal notranslate"><span class="pre">BaseFile.filedate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.BaseFile.filename"><code class="docutils literal notranslate"><span class="pre">BaseFile.filename</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.BaseFile.filesize"><code class="docutils literal notranslate"><span class="pre">BaseFile.filesize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.BaseFile.is_local"><code class="docutils literal notranslate"><span class="pre">BaseFile.is_local</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.BaseFile.is_remote"><code class="docutils literal notranslate"><span class="pre">BaseFile.is_remote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.BaseFile.links"><code class="docutils literal notranslate"><span class="pre">BaseFile.links</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.BaseFile.url"><code class="docutils literal notranslate"><span class="pre">BaseFile.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dataset.html#zen.dataset.Deposition"><code class="docutils literal notranslate"><span class="pre">Deposition</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.api"><code class="docutils literal notranslate"><span class="pre">Deposition.api</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.concept_id"><code class="docutils literal notranslate"><span class="pre">Deposition.concept_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.data"><code class="docutils literal notranslate"><span class="pre">Deposition.data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.delete"><code class="docutils literal notranslate"><span class="pre">Deposition.delete()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.discard"><code class="docutils literal notranslate"><span class="pre">Deposition.discard()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.doi"><code class="docutils literal notranslate"><span class="pre">Deposition.doi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.edit"><code class="docutils literal notranslate"><span class="pre">Deposition.edit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.files"><code class="docutils literal notranslate"><span class="pre">Deposition.files</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.id"><code class="docutils literal notranslate"><span class="pre">Deposition.id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.is_editing"><code class="docutils literal notranslate"><span class="pre">Deposition.is_editing</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.is_published"><code class="docutils literal notranslate"><span class="pre">Deposition.is_published</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.metadata"><code class="docutils literal notranslate"><span class="pre">Deposition.metadata</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.new_version"><code class="docutils literal notranslate"><span class="pre">Deposition.new_version()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.publish"><code class="docutils literal notranslate"><span class="pre">Deposition.publish()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.refresh"><code class="docutils literal notranslate"><span class="pre">Deposition.refresh()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.title"><code class="docutils literal notranslate"><span class="pre">Deposition.title</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.Deposition.update"><code class="docutils literal notranslate"><span class="pre">Deposition.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dataset.html#zen.dataset.DepositionFiles"><code class="docutils literal notranslate"><span class="pre">DepositionFiles</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.DepositionFiles.create"><code class="docutils literal notranslate"><span class="pre">DepositionFiles.create()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.DepositionFiles.data"><code class="docutils literal notranslate"><span class="pre">DepositionFiles.data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.DepositionFiles.delete"><code class="docutils literal notranslate"><span class="pre">DepositionFiles.delete()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.DepositionFiles.index"><code class="docutils literal notranslate"><span class="pre">DepositionFiles.index</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.DepositionFiles.list"><code class="docutils literal notranslate"><span class="pre">DepositionFiles.list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.DepositionFiles.storage_size"><code class="docutils literal notranslate"><span class="pre">DepositionFiles.storage_size</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dataset.html#zen.dataset.LocalFile"><code class="docutils literal notranslate"><span class="pre">LocalFile</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFile.checksum"><code class="docutils literal notranslate"><span class="pre">LocalFile.checksum</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFile.filedate"><code class="docutils literal notranslate"><span class="pre">LocalFile.filedate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFile.filesize"><code class="docutils literal notranslate"><span class="pre">LocalFile.filesize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFile.parse_template"><code class="docutils literal notranslate"><span class="pre">LocalFile.parse_template()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFile.placeholders"><code class="docutils literal notranslate"><span class="pre">LocalFile.placeholders</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFile.properties"><code class="docutils literal notranslate"><span class="pre">LocalFile.properties</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFile.update"><code class="docutils literal notranslate"><span class="pre">LocalFile.update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFile.update_metadata"><code class="docutils literal notranslate"><span class="pre">LocalFile.update_metadata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFile.upload"><code class="docutils literal notranslate"><span class="pre">LocalFile.upload()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFile.url"><code class="docutils literal notranslate"><span class="pre">LocalFile.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles"><code class="docutils literal notranslate"><span class="pre">LocalFiles</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.add"><code class="docutils literal notranslate"><span class="pre">LocalFiles.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.data"><code class="docutils literal notranslate"><span class="pre">LocalFiles.data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.deposition"><code class="docutils literal notranslate"><span class="pre">LocalFiles.deposition</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.expand"><code class="docutils literal notranslate"><span class="pre">LocalFiles.expand()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.file"><code class="docutils literal notranslate"><span class="pre">LocalFiles.file</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.filter"><code class="docutils literal notranslate"><span class="pre">LocalFiles.filter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.from_file"><code class="docutils literal notranslate"><span class="pre">LocalFiles.from_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.from_template"><code class="docutils literal notranslate"><span class="pre">LocalFiles.from_template()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.index"><code class="docutils literal notranslate"><span class="pre">LocalFiles.index</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.merge"><code class="docutils literal notranslate"><span class="pre">LocalFiles.merge()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.modify_url"><code class="docutils literal notranslate"><span class="pre">LocalFiles.modify_url()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.placeholders"><code class="docutils literal notranslate"><span class="pre">LocalFiles.placeholders</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.properties"><code class="docutils literal notranslate"><span class="pre">LocalFiles.properties</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.save"><code class="docutils literal notranslate"><span class="pre">LocalFiles.save()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.set_dataset_path"><code class="docutils literal notranslate"><span class="pre">LocalFiles.set_dataset_path()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.set_deposition"><code class="docutils literal notranslate"><span class="pre">LocalFiles.set_deposition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.storage_size"><code class="docutils literal notranslate"><span class="pre">LocalFiles.storage_size</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.summary"><code class="docutils literal notranslate"><span class="pre">LocalFiles.summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.update_metadata"><code class="docutils literal notranslate"><span class="pre">LocalFiles.update_metadata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.LocalFiles.upload"><code class="docutils literal notranslate"><span class="pre">LocalFiles.upload()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dataset.html#zen.dataset.ZenodoFile"><code class="docutils literal notranslate"><span class="pre">ZenodoFile</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.ZenodoFile.checksum"><code class="docutils literal notranslate"><span class="pre">ZenodoFile.checksum</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.ZenodoFile.delete"><code class="docutils literal notranslate"><span class="pre">ZenodoFile.delete()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.ZenodoFile.download"><code class="docutils literal notranslate"><span class="pre">ZenodoFile.download()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataset.html#zen.dataset.ZenodoFile.refresh"><code class="docutils literal notranslate"><span class="pre">ZenodoFile.refresh()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">metadata module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.AccessRight"><code class="docutils literal notranslate"><span class="pre">AccessRight</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.AccessRight.access_rights"><code class="docutils literal notranslate"><span class="pre">AccessRight.access_rights</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.AccessRight.data"><code class="docutils literal notranslate"><span class="pre">AccessRight.data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.AccessRight.set"><code class="docutils literal notranslate"><span class="pre">AccessRight.set()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.AccessRight.set_closed"><code class="docutils literal notranslate"><span class="pre">AccessRight.set_closed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.AccessRight.set_embargoed"><code class="docutils literal notranslate"><span class="pre">AccessRight.set_embargoed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.AccessRight.set_open"><code class="docutils literal notranslate"><span class="pre">AccessRight.set_open()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.AccessRight.set_restricted"><code class="docutils literal notranslate"><span class="pre">AccessRight.set_restricted()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Communities"><code class="docutils literal notranslate"><span class="pre">Communities</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Communities.add"><code class="docutils literal notranslate"><span class="pre">Communities.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Communities.clear"><code class="docutils literal notranslate"><span class="pre">Communities.clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Communities.new"><code class="docutils literal notranslate"><span class="pre">Communities.new()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Contributors"><code class="docutils literal notranslate"><span class="pre">Contributors</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Contributors.add"><code class="docutils literal notranslate"><span class="pre">Contributors.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Contributors.clear"><code class="docutils literal notranslate"><span class="pre">Contributors.clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Contributors.contributor_types"><code class="docutils literal notranslate"><span class="pre">Contributors.contributor_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Contributors.new"><code class="docutils literal notranslate"><span class="pre">Contributors.new()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Creators"><code class="docutils literal notranslate"><span class="pre">Creators</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Creators.add"><code class="docutils literal notranslate"><span class="pre">Creators.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Creators.clear"><code class="docutils literal notranslate"><span class="pre">Creators.clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Creators.new"><code class="docutils literal notranslate"><span class="pre">Creators.new()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Dataset.access_right"><code class="docutils literal notranslate"><span class="pre">Dataset.access_right</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Dataset.from_file"><code class="docutils literal notranslate"><span class="pre">Dataset.from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Dates"><code class="docutils literal notranslate"><span class="pre">Dates</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Dates.add"><code class="docutils literal notranslate"><span class="pre">Dates.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Dates.clear"><code class="docutils literal notranslate"><span class="pre">Dates.clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Dates.date_types"><code class="docutils literal notranslate"><span class="pre">Dates.date_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Dates.new"><code class="docutils literal notranslate"><span class="pre">Dates.new()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Grants"><code class="docutils literal notranslate"><span class="pre">Grants</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Grants.add"><code class="docutils literal notranslate"><span class="pre">Grants.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Grants.clear"><code class="docutils literal notranslate"><span class="pre">Grants.clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Grants.new"><code class="docutils literal notranslate"><span class="pre">Grants.new()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Image"><code class="docutils literal notranslate"><span class="pre">Image</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Image.from_file"><code class="docutils literal notranslate"><span class="pre">Image.from_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Image.image_types"><code class="docutils literal notranslate"><span class="pre">Image.image_types</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Keywords"><code class="docutils literal notranslate"><span class="pre">Keywords</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Keywords.add"><code class="docutils literal notranslate"><span class="pre">Keywords.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Keywords.new"><code class="docutils literal notranslate"><span class="pre">Keywords.new()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Lesson"><code class="docutils literal notranslate"><span class="pre">Lesson</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Lesson.from_file"><code class="docutils literal notranslate"><span class="pre">Lesson.from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Locations"><code class="docutils literal notranslate"><span class="pre">Locations</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Locations.add"><code class="docutils literal notranslate"><span class="pre">Locations.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Locations.clear"><code class="docutils literal notranslate"><span class="pre">Locations.clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Locations.new"><code class="docutils literal notranslate"><span class="pre">Locations.new()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Metadata"><code class="docutils literal notranslate"><span class="pre">Metadata</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.access_conditions"><code class="docutils literal notranslate"><span class="pre">Metadata.access_conditions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.access_right"><code class="docutils literal notranslate"><span class="pre">Metadata.access_right</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.communities"><code class="docutils literal notranslate"><span class="pre">Metadata.communities</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.conference_acronym"><code class="docutils literal notranslate"><span class="pre">Metadata.conference_acronym</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.conference_dates"><code class="docutils literal notranslate"><span class="pre">Metadata.conference_dates</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.conference_place"><code class="docutils literal notranslate"><span class="pre">Metadata.conference_place</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.conference_session"><code class="docutils literal notranslate"><span class="pre">Metadata.conference_session</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.conference_session_part"><code class="docutils literal notranslate"><span class="pre">Metadata.conference_session_part</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.conference_title"><code class="docutils literal notranslate"><span class="pre">Metadata.conference_title</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.conference_url"><code class="docutils literal notranslate"><span class="pre">Metadata.conference_url</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.contributors"><code class="docutils literal notranslate"><span class="pre">Metadata.contributors</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.creators"><code class="docutils literal notranslate"><span class="pre">Metadata.creators</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.dates"><code class="docutils literal notranslate"><span class="pre">Metadata.dates</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.description"><code class="docutils literal notranslate"><span class="pre">Metadata.description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.embargo_date"><code class="docutils literal notranslate"><span class="pre">Metadata.embargo_date</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.from_file"><code class="docutils literal notranslate"><span class="pre">Metadata.from_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.grants"><code class="docutils literal notranslate"><span class="pre">Metadata.grants</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.image_type"><code class="docutils literal notranslate"><span class="pre">Metadata.image_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.imprint_isbn"><code class="docutils literal notranslate"><span class="pre">Metadata.imprint_isbn</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.imprint_place"><code class="docutils literal notranslate"><span class="pre">Metadata.imprint_place</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.imprint_publisher"><code class="docutils literal notranslate"><span class="pre">Metadata.imprint_publisher</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.journal_issue"><code class="docutils literal notranslate"><span class="pre">Metadata.journal_issue</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.journal_pages"><code class="docutils literal notranslate"><span class="pre">Metadata.journal_pages</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.journal_title"><code class="docutils literal notranslate"><span class="pre">Metadata.journal_title</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.journal_volume"><code class="docutils literal notranslate"><span class="pre">Metadata.journal_volume</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.keywords"><code class="docutils literal notranslate"><span class="pre">Metadata.keywords</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.language"><code class="docutils literal notranslate"><span class="pre">Metadata.language</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.license"><code class="docutils literal notranslate"><span class="pre">Metadata.license</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.locations"><code class="docutils literal notranslate"><span class="pre">Metadata.locations</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.method"><code class="docutils literal notranslate"><span class="pre">Metadata.method</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.notes"><code class="docutils literal notranslate"><span class="pre">Metadata.notes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.partof_pages"><code class="docutils literal notranslate"><span class="pre">Metadata.partof_pages</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.partof_title"><code class="docutils literal notranslate"><span class="pre">Metadata.partof_title</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.placeholders"><code class="docutils literal notranslate"><span class="pre">Metadata.placeholders</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.prereserve_doi"><code class="docutils literal notranslate"><span class="pre">Metadata.prereserve_doi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.publication_type"><code class="docutils literal notranslate"><span class="pre">Metadata.publication_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.references"><code class="docutils literal notranslate"><span class="pre">Metadata.references</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.related_identifiers"><code class="docutils literal notranslate"><span class="pre">Metadata.related_identifiers</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.render"><code class="docutils literal notranslate"><span class="pre">Metadata.render()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.subjects"><code class="docutils literal notranslate"><span class="pre">Metadata.subjects</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.thesis_supervisors"><code class="docutils literal notranslate"><span class="pre">Metadata.thesis_supervisors</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.thesis_university"><code class="docutils literal notranslate"><span class="pre">Metadata.thesis_university</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.title"><code class="docutils literal notranslate"><span class="pre">Metadata.title</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.upload_type"><code class="docutils literal notranslate"><span class="pre">Metadata.upload_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.upload_types"><code class="docutils literal notranslate"><span class="pre">Metadata.upload_types</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Metadata.version"><code class="docutils literal notranslate"><span class="pre">Metadata.version</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Other"><code class="docutils literal notranslate"><span class="pre">Other</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Other.from_file"><code class="docutils literal notranslate"><span class="pre">Other.from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.PhysicalObject"><code class="docutils literal notranslate"><span class="pre">PhysicalObject</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.PhysicalObject.from_file"><code class="docutils literal notranslate"><span class="pre">PhysicalObject.from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Placeholder"><code class="docutils literal notranslate"><span class="pre">Placeholder</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Placeholder.json_key"><code class="docutils literal notranslate"><span class="pre">Placeholder.json_key</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Placeholder.schema"><code class="docutils literal notranslate"><span class="pre">Placeholder.schema</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Poster"><code class="docutils literal notranslate"><span class="pre">Poster</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Poster.from_file"><code class="docutils literal notranslate"><span class="pre">Poster.from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Presentation"><code class="docutils literal notranslate"><span class="pre">Presentation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Presentation.from_file"><code class="docutils literal notranslate"><span class="pre">Presentation.from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Publication"><code class="docutils literal notranslate"><span class="pre">Publication</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Publication.from_file"><code class="docutils literal notranslate"><span class="pre">Publication.from_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Publication.publication_types"><code class="docutils literal notranslate"><span class="pre">Publication.publication_types</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.References"><code class="docutils literal notranslate"><span class="pre">References</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.References.add"><code class="docutils literal notranslate"><span class="pre">References.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.References.new"><code class="docutils literal notranslate"><span class="pre">References.new()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.RelatedIdent"><code class="docutils literal notranslate"><span class="pre">RelatedIdent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.RelatedIdent.add"><code class="docutils literal notranslate"><span class="pre">RelatedIdent.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.RelatedIdent.clear"><code class="docutils literal notranslate"><span class="pre">RelatedIdent.clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.RelatedIdent.new"><code class="docutils literal notranslate"><span class="pre">RelatedIdent.new()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.RelatedIdent.relations"><code class="docutils literal notranslate"><span class="pre">RelatedIdent.relations</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.RelatedIdent.supported_identifiers"><code class="docutils literal notranslate"><span class="pre">RelatedIdent.supported_identifiers</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Software"><code class="docutils literal notranslate"><span class="pre">Software</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Software.from_file"><code class="docutils literal notranslate"><span class="pre">Software.from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Subjects"><code class="docutils literal notranslate"><span class="pre">Subjects</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Subjects.add"><code class="docutils literal notranslate"><span class="pre">Subjects.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Subjects.clear"><code class="docutils literal notranslate"><span class="pre">Subjects.clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Subjects.new"><code class="docutils literal notranslate"><span class="pre">Subjects.new()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.ThesisSupervisors"><code class="docutils literal notranslate"><span class="pre">ThesisSupervisors</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.ThesisSupervisors.add"><code class="docutils literal notranslate"><span class="pre">ThesisSupervisors.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.ThesisSupervisors.clear"><code class="docutils literal notranslate"><span class="pre">ThesisSupervisors.clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.ThesisSupervisors.new"><code class="docutils literal notranslate"><span class="pre">ThesisSupervisors.new()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#zen.metadata.Video"><code class="docutils literal notranslate"><span class="pre">Video</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#zen.metadata.Video.from_file"><code class="docutils literal notranslate"><span class="pre">Video.from_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">utils module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#zen.utils.checksum"><code class="docutils literal notranslate"><span class="pre">checksum()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#zen.utils.date_seq"><code class="docutils literal notranslate"><span class="pre">date_seq()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#zen.utils.download_file"><code class="docutils literal notranslate"><span class="pre">download_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#zen.utils.find_placeholders"><code class="docutils literal notranslate"><span class="pre">find_placeholders()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#zen.utils.is_iso8601_date"><code class="docutils literal notranslate"><span class="pre">is_iso8601_date()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#zen.utils.is_iso8601_datetime"><code class="docutils literal notranslate"><span class="pre">is_iso8601_datetime()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#zen.utils.load_json"><code class="docutils literal notranslate"><span class="pre">load_json()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#zen.utils.replace"><code class="docutils literal notranslate"><span class="pre">replace()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#zen.utils.save_json"><code class="docutils literal notranslate"><span class="pre">save_json()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -91,7 +422,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -108,8 +439,8 @@
       &copy;2024, OpenGeoHub.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="_sources/modules.rst.txt"
