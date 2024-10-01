@@ -511,9 +511,6 @@ class RelatedIdent(_MetaBaseListObject):
             ValueError: If the provided identifier, relation, or resource type is not supported.
         
         """
-        if not identifier in RelatedIdent.supported_identifiers:
-            raise ValueError('Invalid `identifier` parameter. Please, see `supported_identifiers` ' +
-                             'attribute for supported options.')
         if not relation in RelatedIdent.relations:
             raise ValueError('Invalid `relation` parameter. Please, see `relations` attribute for ' + 
                              'supported options.')

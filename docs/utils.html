@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>utils module &#8212; zen  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="metadata module" href="metadata.html" />
@@ -33,7 +32,7 @@
           <div class="body" role="main">
             
   <section id="module-zen.utils">
-<span id="utils-module"></span><h1>utils module<a class="headerlink" href="#module-zen.utils" title="Permalink to this headline">¶</a></h1>
+<span id="utils-module"></span><h1>utils module<a class="headerlink" href="#module-zen.utils" title="Permalink to this heading">¶</a></h1>
 <p>This module provides various functions for loading and saving JSON files, downloading files from the web, and
 computing their checksums. It also includes functions for working with string placeholders, which is a useful feature
 for creating basic templates.</p>
@@ -72,19 +71,19 @@ the hashlib library. You can choose the algorithm by specifying it as the <cite>
 <cite>filename</cite> is a URL starting with a valid schema (e.g. ‘<a class="reference external" href="https://">https://</a>’, ‘<a class="reference external" href="http://">http://</a>’), the function
 retrieves the file content and calculates the checksum.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<em>str</em>) – The path to the file for which to calculate the checksum.</p></li>
 <li><p><strong>algorithm</strong> (<em>str='md5'</em>) – The hash algorithm to use.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The checksum hash of the file.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If the filename is not a local file or not is URL starting with a
     valid schema (e.g. ‘<a class="reference external" href="https://">https://</a>’, ‘<a class="reference external" href="http://">http://</a>’).</p>
 </dd>
@@ -103,14 +102,14 @@ retrieves the file content and calculates the checksum.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="zen.utils.date_seq">
-<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">date_seq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dateutil.relativedelta.relativedelta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'%Y%m%d'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feb29</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#zen.utils.date_seq" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">date_seq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">relativedelta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'%Y%m%d'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feb29</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#zen.utils.date_seq" title="Permalink to this definition">¶</a></dt>
 <dd><p>Date sequence.</p>
 <p>Generates a sequence of dates between the start and end dates with a specified time delta.
 This function takes a start date and an end date, and a time interval (delta) to generate a
 sequence of dates. It returns a list of formatted dates, with an option to exclude February
 29th if desired.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>start_date</strong> (<em>str</em>) – The start date of the sequence in the format specified by date_format.</p></li>
 <li><p><strong>end_date</strong> (<em>str</em>) – The end date of the sequence in the format specified by date_format.</p></li>
@@ -119,10 +118,10 @@ sequence of dates. It returns a list of formatted dates, with an option to exclu
 <li><p><strong>feb29</strong> (<em>bool=True</em>) – Whether to include or exclude February 29th in the sequence.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A list of dates in the format specified by date_format.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list</p>
 </dd>
 </dl>
@@ -148,19 +147,19 @@ destination path. It is designed to work with files accessible via HTTP or HTTPS
 location of the file.</p>
 <p>After a successful download, the function returns the local path of the downloaded file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>url</strong> (<em>str</em>) – The URL of the file to be downloaded.</p></li>
 <li><p><strong>dest_file</strong> (<em>str</em>) – The path where the downloaded file should be saved.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The path of the downloaded file.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If the file’s URL doesn’t start with a valid schema (e.g. ‘<a class="reference external" href="https://">https://</a>’, ‘<a class="reference external" href="http://">http://</a>’).</p>
 </dd>
 </dl>
@@ -173,7 +172,7 @@ location of the file.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="zen.utils.find_placeholders">
-<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">find_placeholders</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'zen:'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#zen.utils.find_placeholders" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">find_placeholders</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'zen:'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#zen.utils.find_placeholders" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find Placeholders in Data Object</p>
 <p>A placeholder is a special identifier used within a text or data structure that serves as a temporary
 representation. They mark values that need to be replaced with specific content or data during processing.
@@ -195,17 +194,17 @@ with name ‘age’.</p></li>
 As the result of this function is a Set, it gives just one entry per placeholder even if that specific
 placeholder is used more than once in the <cite>obj</cite>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>obj</strong> (<em>Any</em>) – Any data containing strings placeholders or dictionary placeholders to be identified.</p></li>
 <li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>str</strong><strong>]</strong><strong>='zen</strong> (<em>schema</em>) – ‘): URI schema to match dictionary placeholders. None value</p></li>
 <li><p><strong>placeholders.</strong> (<em>disable dictionary</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A set containing all placeholder names found in the <cite>obj</cite> value.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Set[str]</p>
 </dd>
 </dl>
@@ -239,13 +238,13 @@ placeholder is used more than once in the <cite>obj</cite>.</p>
 <span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">is_iso8601_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#zen.utils.is_iso8601_date" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if a given string represents a date in ISO 8601 format (YYYY-MM-DD).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>value</strong> (<em>str</em>) – The string to be checked for ISO 8601 date format.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>True if the input string is in ISO 8601 date format, False otherwise.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -257,13 +256,13 @@ placeholder is used more than once in the <cite>obj</cite>.</p>
 <dd><p>Check if a given string represents a date time in ISO 8601 format
 (YYYY-MM-DD HH:MM:SS.mmmmmm-HH:MM).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>value</strong> (<em>str</em>) – The string to be checked for ISO 8601 date time format.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>True if the input string is in ISO 8601 date time format, False otherwise.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -274,13 +273,13 @@ placeholder is used more than once in the <cite>obj</cite>.</p>
 <span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">load_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#zen.utils.load_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load JSON data from a local file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>file</strong> (<em>str</em>) – The path to the JSON file.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Any value stored in a JSON file.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Any</p>
 </dd>
 </dl>
@@ -288,7 +287,7 @@ placeholder is used more than once in the <cite>obj</cite>.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="zen.utils.replace">
-<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'zen:'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#zen.utils.replace" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'zen:'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#zen.utils.replace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Replace Placeholders in a given object</p>
 <p>A placeholder is a special identifier used within a text or data structure that serves as a temporary
 representation. They mark values that need to be replaced with specific content or data during processing.
@@ -319,7 +318,7 @@ same placeholder name in <cite>replacements</cite> dictionary. However, all othe
 that holds ‘$ref’ key are discarded during the replacement process to ensure consistency and prevent
 unexpected combinations of properties.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>obj</strong> (<em>Any</em>) – The data object containing strings or dictionary placeholders to be replaced.</p></li>
 <li><p><strong>replacements</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – A dictionary mapping placeholder names to their replacement values.</p></li>
@@ -327,10 +326,10 @@ unexpected combinations of properties.</p>
 <li><p><strong>placeholders.</strong> (<em>disable dictionary</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The data object with replaced string placeholders.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Any</p>
 </dd>
 </dl>
@@ -389,13 +388,13 @@ is discarded on “info” placeholder replacement.</p>
 <span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">save_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#zen.utils.save_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save dictionary data as JSON to a local file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<em>dict</em>) – Any data to be saved into a JSON file.</p></li>
 <li><p><strong>file</strong> (<em>str</em>) – The path to the target JSON file.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -450,7 +449,7 @@ is discarded on “info” placeholder replacement.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -467,8 +466,8 @@ is discarded on “info” placeholder replacement.</p>
       &copy;2024, OpenGeoHub.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="_sources/utils.rst.txt"
