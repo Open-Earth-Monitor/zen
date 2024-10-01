@@ -12,3 +12,4 @@ _build/
 deploy.sh
 zen.code-workspace
 .vscode/settings.json
+.test.ipynb
