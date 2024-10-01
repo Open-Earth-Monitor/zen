@@ -8,4 +8,3 @@ cp -r sphinx/_build/html/* docs/
 [ ! -f "docs/.nojekyll" ] && touch "docs/.nojekyll"
 git add docs
 git commit -m "Documentation deployment"
-git push origin dev
