@@ -9,6 +9,9 @@ dist/
 _build/
 
 # Local support files
-deploy.sh
+src/
+.deploy.sh
 zen.code-workspace
 .vscode/settings.json
+.test.ipynb
+.test.json
