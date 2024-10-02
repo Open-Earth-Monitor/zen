@@ -14,3 +14,4 @@ src/
 zen.code-workspace
 .vscode/settings.json
 .test.ipynb
+.test.json
