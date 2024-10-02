@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='zen',
-    version='0.5.1',
+    version='0.5.2',
     author='Rolf Simoes',
     author_email='rolf.simoes@opengeohub.org',
     description='A Python Library for Interacting with Zenodo',
