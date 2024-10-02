@@ -28,7 +28,38 @@
         },
         "record_id": 112399,
         "owner": 29,
-        "files": [],
+        "files": [
+            {
+                "id": "f019c028-ea10-4b3b-b1a8-06b474d0f93d",
+                "filename": "file1.csv",
+                "filesize": 34308,
+                "checksum": "f421d3e99530f4c8173fc7ef60d4a877",
+                "links": {
+                    "self": "https://sandbox.zenodo.org/api/deposit/depositions/112399/files/f019c028-ea10-4b3b-b1a8-06b474d0f93d",
+                    "download": "https://sandbox.zenodo.org/api/records/112399/draft/files/file1.csv/content"
+                }
+            },
+            {
+                "id": "e7ffc841-1e5f-43da-909f-67387e98054a",
+                "filename": "file3.csv",
+                "filesize": 34182,
+                "checksum": "83cd8f4423a90b7ff61e471067489a45",
+                "links": {
+                    "self": "https://sandbox.zenodo.org/api/deposit/depositions/112399/files/e7ffc841-1e5f-43da-909f-67387e98054a",
+                    "download": "https://sandbox.zenodo.org/api/records/112399/draft/files/file3.csv/content"
+                }
+            },
+            {
+                "id": "24692947-2366-4d35-9ee3-55db5eca708f",
+                "filename": "file2.csv",
+                "filesize": 34249,
+                "checksum": "edc281089341c95484c087c7b0fe8e49",
+                "links": {
+                    "self": "https://sandbox.zenodo.org/api/deposit/depositions/112399/files/24692947-2366-4d35-9ee3-55db5eca708f",
+                    "download": "https://sandbox.zenodo.org/api/records/112399/draft/files/file2.csv/content"
+                }
+            }
+        ],
         "state": "unsubmitted",
         "submitted": false
     },
@@ -38,14 +69,30 @@
             "links": {
                 "download": "examples/file1.csv"
             },
-            "properties": {}
+            "properties": {},
+            "filesize": 34308,
+            "filedate": "2023-11-21T00:41:25.947568",
+            "checksum": "f421d3e99530f4c8173fc7ef60d4a877"
         },
         {
             "filename": "file2.csv",
             "links": {
                 "download": "examples/file2.csv"
             },
-            "properties": {}
+            "properties": {},
+            "filesize": 34249,
+            "filedate": "2023-11-21T00:41:25.947568",
+            "checksum": "edc281089341c95484c087c7b0fe8e49"
+        },
+        {
+            "filename": "file3.csv",
+            "links": {
+                "download": "examples/file3.csv"
+            },
+            "properties": {},
+            "filesize": 34182,
+            "filedate": "2023-11-21T00:41:25.947568",
+            "checksum": "83cd8f4423a90b7ff61e471067489a45"
         }
     ]
 }

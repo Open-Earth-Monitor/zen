@@ -66,7 +66,7 @@ def save_json(data: Any, file: str) -> None:
     
     """
     dirname = os.path.dirname(file)
-    if not os.path.isdir(dirname):
+    if len(dirname) and not os.path.isdir(dirname):
         os.mkdir(dirname)
     with open(file, 'w') as file:
         json.dump(data, file, indent=4)
