@@ -32,7 +32,7 @@ manipulate your deposition data.
 You can install **zen** using pip:
 
 ```bash
-pip install -e 'git+https://github.com/Open-Earth-Monitor/zen#egg=zen[full]'
+pip install -e 'git+https://github.com/Open-Earth-Monitor/zen#egg=zen'
 ```
 
 ## Getting Started
@@ -54,9 +54,6 @@ dep.files.create('examples/file1.csv')
 # Print the deposition ID
 print(f"Deposition ID: {dep.id}")
 
-# Discard the example deposition
-dep.discard()
-
 ```
 
 ### Managing local files
@@ -66,27 +63,33 @@ files are stored in a remote machine, **zen** will download them temporarily jus
 uploading.
 
 ```python
-from zen import LocalFiles
+from zen import LocalFiles, Zenodo
 
 # Create a dataset
-ds = LocalFiles(['examples/file1.csv', 'examples/file2.csv'])
-ds.save('examples/dataset.json')
+ds = LocalFiles(['examples/file1.csv', 'examples/file2.csv'], dataset_path='examples/dataset.json')
 
-# Load a saved dataset
-ds = LocalFiles.from_file('examples/dataset.json')
+# Initialize Zenodo with your API token
+zen = Zenodo(url=Zenodo.sandbox_url, token="your_api_token")
 
 # Create a deposition if there is no one already defined
-dep = ds.get_deposition(url=Zenodo.sandbox_url, token='your_api_token')
+ds.set_deposition(api=zen, create_if_not_exists=True)
+
+# Save and Load a saved dataset
+ds.save()
+ds = LocalFiles.from_file('examples/dataset.json')
+
+# Retrieve the deposition
+ds.set_deposition(api=zen)
 
 # Upload files to Zenodo
-ds.upload(dep)
+ds.upload()
 
 # Add more files to local dataset
 ds.add(['examples/file3.csv'])
 ds.save()
 
 # Just upload modified or new files to Zenodo
-ds.upload(dep)
+ds.upload()
 
 ```
 
@@ -97,21 +100,19 @@ that enables users to automate and personalize dataset descriptions using templa
 
 ```python
 
-from zen.metadata import Dataset
-
 # Create a metadata for a dataset
-meta = Dataset(
-    title='My first dataset',
-    description='The dataset description. Files from index {index_min} to {index_max}.'
-)
+dep.metadata.title = 'My title'
+dep.metadata.description = 'My description of files from {index_min} to {index_max}.'
 
 # Add a creator
-meta.creators.add('My Name')
+dep.metadata.creators.clear()
+dep.metadata.creators.add('My Name')
 
 # Update metadata on Zenodo
 # Create replacement value for the metadata placeholders
 replacements = {'index_min': 1, 'index_max': 3}
-dep.update(meta.render(replacements))
+dep.update(replacements=replacements)
+
 
 ```
 
@@ -131,14 +132,14 @@ a pattern.
 # Create a template with 'index' placeholder
 filename_template = 'file{index}.csv'
 ds = LocalFiles(['examples/file1.csv', 'examples/file2.csv', 'examples/file3.csv'], 
-                 template=filename_template)
+                 template=filename_template, dataset_path='examples/dataset.json')
 
 print(ds.summary())
 #... {'index_min': '1', 'index_max': '3'}
 
 # Get the previous metadata template and render a metadata
 replacements = ds.summary()
-meta.render(replacements)
+dep.update(replacements=replacements)
 
 ```
 
@@ -163,7 +164,7 @@ print([f.url for f in ds])
 
 # Get the previous metadata template and render a metadata
 replacements = ds.summary()
-meta.render(replacements)
+dep.update(replacements=replacements)
 
 ```
 

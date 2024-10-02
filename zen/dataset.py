@@ -94,7 +94,7 @@ Examples:
         dep.publish()
         # Create a new version of the deposition to add more files
         dep.new_version()
-    
+        
 
 Note:
     - Before using this submodule, make sure you have a valid Zenodo account and access token.
@@ -240,6 +240,7 @@ class LocalFile(BaseFile):
         >>> local_file.update_metadata()  # Get the file date and size
         >>> print(local_file.filename)
         file1.csv
+        
     
     """
     def __init__(self, file: Union[Dict[str,Any],str]) -> None:
@@ -512,6 +513,7 @@ class ZenodoFile(BaseFile):
         Discard the deposition example.
         
         >>> dep.discard()
+        
     
     """
     def __init__(self, file: Dict[str,Any], deposition: Deposition) -> None:
