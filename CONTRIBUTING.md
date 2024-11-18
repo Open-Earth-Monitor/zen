@@ -18,6 +18,45 @@ For reporting issues and making feature suggestions please refer to the [issue t
 2. Install dependencies (not needed if only contributing documentation):
   - for the Python package: `pip install -r requirements.txt` into a Python 3.6+ environment
 
+### Building and Deploying Documentation  
+
+#### Overview of Documentation Files  
+
+The Sphinx documentation is composed of the following key files in the `sphinx/` directory:  
+- **`index.rst`**: The main entry point, containing the table of contents and an overview of the documentation structure.  
+- **Topic-specific `.rst` files**:  
+  - `api.rst`, `dataset.rst`, `metadata.rst`, `modules.rst`, `utils.rst`: These files contain detailed information about specific aspects of the project, such as APIs, datasets, and utility functions.  
+- **`conf.py`**: Configuration file for the Sphinx build system, specifying settings like extensions, themes, and project metadata.  
+- **Assets (`img/` folder)**: Includes images used in the documentation, such as `zen-logo.png`.  
+
+You can update these files to modify or expand the documentation.  
+
+#### Steps to Build and Deploy Documentation  
+
+1. **Clean and build the documentation**:  
+   Go to the project folder and run the following commands to clean and rebuild the Sphinx documentation:  
+   ```bash
+   make clean
+   make html
+   ```  
+   The generated documentation will be located in the `./sphinx/_build/html` folder.  
+
+2. **Deploy the documentation**:  
+   Update the `docs/` folder with the new documentation files:  
+   ```bash
+   rm -fr docs/*
+   cp -r sphinx/_build/html/* docs/
+   touch docs/.nojekyll
+   ```
+
+4. **Commit and push the changes**:  
+   Add the changes and commit using the `docs` type in the commit message format:  
+   ```bash
+   git add docs  
+   git commit -m "docs: update deployed documentation"  
+   git push  
+   ```  
+
 ### Development
 
 All changes to code and documentation should be made in a separate branch, created from an up-to-date local `main`. The **branch name** must refer a open issue (``i{ISSUE_ID}``):
@@ -28,7 +67,7 @@ git pull
 git checkout -b i0
 
 git add [CHANGED FILES]
-git commit -m "closes #0; [GENERAL COMMENT]"
+git commit -m "fix(scope): resolves #0; [GENERAL COMMENT]"
 
 git checkout main
 git pull
@@ -37,8 +76,6 @@ git push
 
 git branch -d i0
 ```
-
-When the changes are complete a merge request may be submitted from the development branch (if you have submitted a merge request with incomplete changes, please indicate that the branch is not to be merged yet in the title of the request).
 
 If you do not have the appropriate permissions to submit new branches to the **zen** repository, you may fork this repository into your own Github namespace and submit merge requests from there.
 
