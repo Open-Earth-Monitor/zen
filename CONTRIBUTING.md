@@ -53,6 +53,7 @@ You can update these files to modify or expand the documentation.
 4. **Commit and push the changes**:  
    Add the changes and commit using the `docs` type in the commit message format:  
    ```bash
+   git add sphinx
    git add docs  
    git commit -m "docs: update deployed documentation"  
    git push  
