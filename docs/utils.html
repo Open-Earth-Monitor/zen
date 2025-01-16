@@ -1,26 +1,25 @@
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="./">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>utils module &#8212; zen  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=686e5160" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
-    <script src="_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="metadata module" href="metadata.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
-
   
-  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head><body>
   
@@ -32,8 +31,375 @@
 
           <div class="body" role="main">
             
-  <section id="utils-module">
-<h1>utils module<a class="headerlink" href="#utils-module" title="Link to this heading">¶</a></h1>
+  <section id="module-zen.utils">
+<span id="utils-module"></span><h1>utils module<a class="headerlink" href="#module-zen.utils" title="Permalink to this heading">¶</a></h1>
+<p>This module provides various functions for loading and saving JSON files, downloading files from the web, and
+computing their checksums. It also includes functions for working with string placeholders, which is a useful feature
+for creating basic templates.</p>
+<p class="rubric">Examples</p>
+<p>The primary purpose of these functions is for internal use by the package, but users can also utilize them:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">zen.api</span> <span class="kn">import</span> <span class="n">load_json</span><span class="p">,</span> <span class="n">save_json</span><span class="p">,</span> <span class="n">download_file</span><span class="p">,</span> <span class="n">checksum</span>
+
+<span class="c1"># Load JSON data from a file</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="s1">&#39;data.json&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a dictionary to save as JSON</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">}</span>
+
+<span class="c1"># Save the dictionary as JSON to a file</span>
+<span class="n">save_json</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;data.json&#39;</span><span class="p">)</span>
+
+<span class="c1"># Download a file from a URL and save it locally</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://example.com/file1.csv&#39;</span>
+<span class="n">dest_file</span> <span class="o">=</span> <span class="s1">&#39;file1.csv&#39;</span>
+<span class="n">download_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">dest_file</span><span class="p">)</span>
+
+<span class="c1"># Calculate the MD5 checksum hash of a local file</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;file1.csv&#39;</span>
+<span class="n">hash_value</span> <span class="o">=</span> <span class="n">checksum</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;md5&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MD5 hash of file &#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">hash_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py function">
+<dt class="sig sig-object py" id="zen.utils.checksum">
+<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">checksum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'md5'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#zen.utils.checksum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the checksum hash of a file.</p>
+<p>This function calculates the checksum hash of a file using the specified hash algorithm. The
+supported hash algorithms include ‘md5’, ‘sha1’, ‘sha256’, ‘sha512’, and others available in
+the hashlib library. You can choose the algorithm by specifying it as the <cite>algorithm</cite> parameter.</p>
+<p>If <cite>filename</cite> is a local file, the function reads the file and calculates the checksum. If
+<cite>filename</cite> is a URL starting with a valid schema (e.g. ‘<a class="reference external" href="https://">https://</a>’, ‘<a class="reference external" href="http://">http://</a>’), the function
+retrieves the file content and calculates the checksum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – The path to the file for which to calculate the checksum.</p></li>
+<li><p><strong>algorithm</strong> (<em>str='md5'</em>) – The hash algorithm to use.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The checksum hash of the file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the filename is not a local file or not is URL starting with a
+    valid schema (e.g. ‘<a class="reference external" href="https://">https://</a>’, ‘<a class="reference external" href="http://">http://</a>’).</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">zen.utils</span> <span class="kn">import</span> <span class="n">checksum</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">checksum</span><span class="p">(</span><span class="s1">&#39;examples/file1.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;sha256&#39;</span><span class="p">)</span>
+<span class="go">&#39;c4cb7ab6022b9020f35efedd58109de4e63005dbc6786645d28dbfdc64dff902&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">checksum</span><span class="p">(</span><span class="s1">&#39;examples/file2.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;md5&#39;</span><span class="p">)</span>
+<span class="go">&#39;edc281089341c95484c087c7b0fe8e49&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="zen.utils.date_seq">
+<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">date_seq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">relativedelta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'%Y%m%d'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feb29</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#zen.utils.date_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Date sequence.</p>
+<p>Generates a sequence of dates between the start and end dates with a specified time delta.
+This function takes a start date and an end date, and a time interval (delta) to generate a
+sequence of dates. It returns a list of formatted dates, with an option to exclude February
+29th if desired.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_date</strong> (<em>str</em>) – The start date of the sequence in the format specified by date_format.</p></li>
+<li><p><strong>end_date</strong> (<em>str</em>) – The end date of the sequence in the format specified by date_format.</p></li>
+<li><p><strong>delta</strong> (<em>relativedelta</em>) – The time difference between each date in the sequence.</p></li>
+<li><p><strong>date_format</strong> (<em>str='%Y%m%d'</em>) – The format of the dates in the sequence.</p></li>
+<li><p><strong>feb29</strong> (<em>bool=True</em>) – Whether to include or exclude February 29th in the sequence.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of dates in the format specified by date_format.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dateutil.relativedelta</span> <span class="kn">import</span> <span class="n">relativedelta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">start_date</span> <span class="o">=</span> <span class="s2">&quot;20230101&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">end_date</span> <span class="o">=</span> <span class="s2">&quot;20231231&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">delta</span> <span class="o">=</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Generates dates 30 days apart</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_sequence</span> <span class="o">=</span> <span class="n">date_seq</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">date_sequence</span><span class="p">)</span>
+<span class="go">[&#39;20230101&#39;, &#39;20230201&#39;, &#39;20230301&#39;, &#39;20230401&#39;, &#39;20230501&#39;, ...]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="zen.utils.download_file">
+<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">download_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#zen.utils.download_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download a file from a URL and save it locally.</p>
+<p>This function downloads a file from the specified URL and saves it locally to the provided
+destination path. It is designed to work with files accessible via HTTP or HTTPS URLs. The
+<cite>url</cite> parameter should begin with a valid schema (e.g., ‘<a class="reference external" href="https://">https://</a>’, ‘<a class="reference external" href="http://">http://</a>’) to indicate the
+location of the file.</p>
+<p>After a successful download, the function returns the local path of the downloaded file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> (<em>str</em>) – The URL of the file to be downloaded.</p></li>
+<li><p><strong>dest_file</strong> (<em>str</em>) – The path where the downloaded file should be saved.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The path of the downloaded file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the file’s URL doesn’t start with a valid schema (e.g. ‘<a class="reference external" href="https://">https://</a>’, ‘<a class="reference external" href="http://">http://</a>’).</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">download_file</span><span class="p">(</span><span class="s1">&#39;https://example.com/file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;local_file.txt&#39;</span><span class="p">)</span>
+<span class="go">&#39;local_file.txt&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="zen.utils.find_placeholders">
+<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">find_placeholders</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'zen:'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#zen.utils.find_placeholders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find Placeholders in Data Object</p>
+<p>A placeholder is a special identifier used within a text or data structure that serves as a temporary
+representation. They mark values that need to be replaced with specific content or data during processing.
+This function identifies and lists all string and dictionary placeholders found within the <cite>obj</cite> value.
+A placeholder name must start with a letter or digit [a-zA-Z0-9] and can be followed by letters, digits, or
+underscore character. For example, valid placeholder names include ‘var1’, ‘_age_’ and ‘full_name’, but not
+‘9fields’.</p>
+<p>There are two types of placeholders that this function can handle:</p>
+<ul class="simple">
+<li><p>String Placeholders: These placeholders are used within strings and the placeholder name is enclosed
+within curly braces {}. For example, ‘{age}’ within a string is a string placeholder with name ‘age’.</p></li>
+<li><p>Dictionary Placeholders: These placeholders are inspired by JSON reference. When a ‘$ref’ key is
+encountered within dictionary, and its value is an URI with schema given by <cite>schema</cite>
+parameter, the placeholder name is then resolved as the remaining URI. For example, assuming
+<cite>schema</cite> is set to ‘zen:’, {‘$ref’: ‘zen:age’} defines a dictionary placeholder
+with name ‘age’.</p></li>
+</ul>
+<p>This function recursively search string and dictionary placeholders inside the given <cite>obj</cite>.
+As the result of this function is a Set, it gives just one entry per placeholder even if that specific
+placeholder is used more than once in the <cite>obj</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Any</em>) – Any data containing strings placeholders or dictionary placeholders to be identified.</p></li>
+<li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>str</strong><strong>]</strong><strong>='zen</strong> (<em>schema</em>) – ‘): URI schema to match dictionary placeholders. None value</p></li>
+<li><p><strong>placeholders.</strong> (<em>disable dictionary</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set containing all placeholder names found in the <cite>obj</cite> value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Set[str]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Given a data object with placeholders:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello, </span><span class="si">{name}</span><span class="s1">!&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;score&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{score}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;$ref&#39;</span><span class="p">:</span> <span class="s1">&#39;zen:var1&#39;</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>Calling <cite>find_placeholders(data)</cite> will identify the placeholders:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">placeholders</span> <span class="o">=</span> <span class="n">find_placeholders</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">placeholders</span><span class="p">)</span>
+<span class="go">{&#39;name&#39;, &#39;score&#39;, &#39;var1&#39;}</span>
+</pre></div>
+</div>
+<p>Note that in this example, the expantion of “var1” dictionary placeholder will discard the
+‘score’ key.</p>
+<p>The function can handle nested dictionaries and lists:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data_list</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Greetings, </span><span class="si">{greet}</span><span class="s1">!&#39;</span><span class="p">},</span> <span class="s1">&#39;Great day, </span><span class="si">{day}</span><span class="s1">!&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Calling <cite>find_placeholders(data_list)</cite> will identify placeholders in nested structures:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">placeholders</span> <span class="o">=</span> <span class="n">find_placeholders</span><span class="p">(</span><span class="n">data_list</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">placeholders</span><span class="p">)</span>
+<span class="go">{&#39;greet&#39;, &#39;day&#39;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="zen.utils.is_iso8601_date">
+<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">is_iso8601_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#zen.utils.is_iso8601_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a given string represents a date in ISO 8601 format (YYYY-MM-DD).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>str</em>) – The string to be checked for ISO 8601 date format.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the input string is in ISO 8601 date format, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="zen.utils.is_iso8601_datetime">
+<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">is_iso8601_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#zen.utils.is_iso8601_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a given string represents a date time in ISO 8601 format
+(YYYY-MM-DD HH:MM:SS.mmmmmm-HH:MM).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>str</em>) – The string to be checked for ISO 8601 date time format.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the input string is in ISO 8601 date time format, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="zen.utils.load_json">
+<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">load_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#zen.utils.load_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load JSON data from a local file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>str</em>) – The path to the JSON file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Any value stored in a JSON file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="zen.utils.replace">
+<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'zen:'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#zen.utils.replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace Placeholders in a given object</p>
+<p>A placeholder is a special identifier used within a text or data structure that serves as a temporary
+representation. They mark values that need to be replaced with specific content or data during processing.
+This function identifies and lists all string and dictionary placeholders found within the <cite>obj</cite> value.
+A placeholder name must start with a letter or digit [a-zA-Z0-9] and can be followed by letters, digits, or
+underscore character. For example, valid placeholder names include ‘var1’, ‘_age_’ and ‘full_name’, but not
+‘9fields’.</p>
+<p>There are two types of placeholders that this function can handle:</p>
+<ul class="simple">
+<li><p>String Placeholders: These placeholders are used within strings and the placeholder name is enclosed
+within curly braces {}. For example, ‘{age}’ within a string is a string placeholder with name ‘age’.</p></li>
+<li><p>Dictionary Placeholders: These placeholders are inspired by JSON reference. When a ‘$ref’ key is
+encountered within dictionary, and its value is an URI with schema given by <cite>schema</cite>
+parameter, the placeholder name is then resolved as the remaining URI. For example, assuming
+<cite>schema</cite> is set to ‘zen:’, {‘$ref’: ‘zen:age’} defines a dictionary placeholder
+with name ‘age’.</p></li>
+</ul>
+<p>This function recursively replaces string and dictionary placeholders inside the given <cite>obj</cite>
+object using a dictionary of <cite>replacements</cite>. All placeholders present in <cite>obj</cite> must
+have corresponding values in the <cite>replacements</cite> dictionary. If <cite>obj</cite> is a list or a dictionary,
+<cite>replace()</cite> will recurse through each element, replacing any placeholder occurrences with
+the corresponding value from <cite>replacements</cite>. You can identify all placeholders in <cite>obj</cite> using
+the <cite>find_placeholders()</cite> function.</p>
+<p>String placeholder replacements always expand to strings. To expand to a different data type,
+such as numbers, strings, lists, or dictionaries, use a dictionary placeholder. The dictionary placeholder
+replacements always expand the object containing ‘$ref’ key by the value provided in the entry with the
+same placeholder name in <cite>replacements</cite> dictionary. However, all other properties in the same object
+that holds ‘$ref’ key are discarded during the replacement process to ensure consistency and prevent
+unexpected combinations of properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Any</em>) – The data object containing strings or dictionary placeholders to be replaced.</p></li>
+<li><p><strong>replacements</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – A dictionary mapping placeholder names to their replacement values.</p></li>
+<li><p><strong>(</strong><strong>Optional</strong><strong>[</strong><strong>str</strong><strong>]</strong><strong>='zen</strong> (<em>schema</em>) – ‘): URI schema to match dictionary placeholders. None value</p></li>
+<li><p><strong>placeholders.</strong> (<em>disable dictionary</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The data object with replaced string placeholders.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Given a dictionary with placeholders and a replacement dictionary:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{person}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{years}</span><span class="s1">&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">replacements</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;person&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;years&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Calling <cite>replace(data, replacements)</cite> will replace placeholders in the dictionary:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">replacements</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">{&#39;name&#39;: &#39;Alice&#39;, &#39;age&#39;: 25}</span>
+</pre></div>
+</div>
+<p>The function can handle nested dictionaries and lists:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello, </span><span class="si">{name}</span><span class="s1">!&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{age}</span><span class="s1">&#39;</span><span class="p">},</span> <span class="s1">&#39;scores&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{score}</span><span class="s1">&#39;</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">replacements</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">:</span> <span class="mi">95</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Calling <cite>replace(data, replacements)</cite> will recursively replace placeholders:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">replacements</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">{&#39;name&#39;: &#39;Hello, Alice!&#39;, &#39;info&#39;: {&#39;age&#39;: 25}, &#39;scores&#39;: [85, 90, &#39;95&#39;]}</span>
+</pre></div>
+</div>
+<p>Note that ‘score’ placeholder was converted to string as it is a string placeholder, despite the
+replacing value is a number. To replace values to types other than strings, please use
+dictionary placeholders.</p>
+<p>Dictionary placeholder examples:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="go">    &quot;$ref&quot;: &quot;zen:external_ref&quot;,</span>
+<span class="go">    &quot;name&quot;: &quot;John&quot;,</span>
+<span class="go">    &quot;age&quot;: 30</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>In this example, the ‘$ref’ key replaces the entire object with the content of ‘zen:external_ref’,
+and the “name” and “age” properties are discarded.</p>
+<p>Dictionary Placeholder Example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello, </span><span class="si">{name}</span><span class="s1">!&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;$ref&#39;</span><span class="p">:</span> <span class="s1">&#39;zen:info&#39;</span><span class="p">,</span> <span class="s1">&#39;scores&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;$ref&#39;</span><span class="p">:</span> <span class="n">zen</span><span class="p">:</span><span class="n">score</span><span class="p">}]}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">replacements</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span> <span class="s1">&#39;score&#39;</span><span class="p">:</span> <span class="mi">95</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Calling <cite>replace(data, replacements)</cite> will recursively replace placeholders. However, ‘scores’ key
+is discarded on “info” placeholder replacement.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">replacements</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">{&#39;name&#39;: &#39;Hello, Alice!&#39;, &#39;info&#39;: {&#39;age&#39;: 25}}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="zen.utils.save_json">
+<span class="sig-prename descclassname"><span class="pre">zen.utils.</span></span><span class="sig-name descname"><span class="pre">save_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#zen.utils.save_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save dictionary data as JSON to a local file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dict</em>) – Any data to be saved into a JSON file.</p></li>
+<li><p><strong>file</strong> (<em>str</em>) – The path to the target JSON file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -41,7 +407,7 @@
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="index.html">zen</a></h1>
 
@@ -52,16 +418,7 @@
 
 
 
-
-<search id="searchbox" style="display: none" role="search">
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">zen</a><ul class="current">
@@ -83,6 +440,16 @@
   </ul></li>
 </ul>
 </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -96,11 +463,11 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &#169;2024, OpenGeoHub.
+      &copy;2024, OpenGeoHub.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.3</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="_sources/utils.rst.txt"
