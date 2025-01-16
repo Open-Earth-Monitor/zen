@@ -29,6 +29,11 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
+Background & Motivation
+-----------------------
+The **FAIR** principles stand for improving the **F**\indability, **A**\ccessibility, **I**\nteroperability, and **R**\euse of data by machines with minimal or no human intervention and were introduced by 
+`Willkinson et al. (2016) <https://doi.org/10.1038/sdata.2016.18>`_ to deal with increasing data volume and complexity. Environmental data, driven by Earth Observation with satellite imagery, has already faced that challenge as many satellite image archives, such as those from NASA Landsat mission and ESA Copernicus missions become open, providing PB-scale data volumes for research and other exploration.  
+Within the Open-Earth-Monitor Cyberinfrastructure project, a comprehensive survey was conducted where both environmental data users and producers were targeted to understand how they are familiar with FAIR principles in their data management. The survey results revealed that FAIR principles are considered important for geospatial data management but still lack implementation by many geospatial data users and providers. One of the reasons for that is the lack of resources and tools to make data more FAIR. Furthermore, both groups find it most important for data to be online findable and open. As a reflection to this feedback, the `zen` library has been introduced as an open tool to efficiently expose and manage data at the Zenodo repository, making such datasets findable.
 
 Acknowledgements & Funding
 --------------------------
