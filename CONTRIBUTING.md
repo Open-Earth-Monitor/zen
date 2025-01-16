@@ -15,8 +15,9 @@ For reporting issues and making feature suggestions please refer to the [issue t
 ### Initial setup
 
 1. Clone the repo: `git clone https://gitlab.opengeohub.org/rolfsimoes/zen/zen.git`
-2. Install dependencies (not needed if only contributing documentation):
+2. Install dependencies:
   - for the Python package: `pip install -r requirements.txt` into a Python 3.6+ environment
+  - for contributing documentation: `pip install sphinx`
 
 ### Building and Deploying Documentation  
 
